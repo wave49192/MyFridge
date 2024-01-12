@@ -19,6 +19,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
+      <h1 className="text-3xl font-bold underline">My Fridge</h1>
       <IngredientList
         ingredients={ingredients}
         onImageUpload={handleImageUpload}
