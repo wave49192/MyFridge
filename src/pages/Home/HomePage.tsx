@@ -6,16 +6,9 @@ const HomePage: React.FC = () => {
   const [ingredients, setIngredients] = useState<string[]>([]);
   const [recipes, setRecipes] = useState<string[]>([]);
 
-  const handleImageUpload = (file: File) => {
-    // TODO: Call backend to process the image and recognize ingredients
-    // Update the 'ingredients' state with the recognized ingredients
-    // Call another function to fetch recipes based on the recognized ingredients
-  };
+  const handleImageUpload = (file: File) => {};
 
-  const fetchRecipes = (recognizedIngredients: string[]) => {
-    // TODO: Call a recipe API to fetch recipes based on recognized ingredients
-    // Update the 'recipes' state with the fetched recipes
-  };
+  const fetchRecipes = (recognizedIngredients: string[]) => {};
 
   return (
     <div>
