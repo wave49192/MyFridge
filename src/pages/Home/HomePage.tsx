@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { RecipeList, IngredientList } from "../../components";
+import { RecipeList, IngredientList, Navbar } from "../../components";
 
 const HomePage: React.FC = () => {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -19,7 +19,7 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">My Fridge</h1>
+      <Navbar />
       <IngredientList
         ingredients={ingredients}
         onImageUpload={handleImageUpload}
