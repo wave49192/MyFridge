@@ -7,7 +7,11 @@ import "./index.css";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <html data-theme="cupcake">
+        <App />
+      </html>
+    ),
   },
 ]);
 

@@ -22,6 +22,7 @@ const IngredientList: React.FC<IngredientListProps> = ({
       <input
         type="file"
         accept="image/*"
+        className="file-input file-input-bordered w-full max-w-xs"
         onChange={(e) => e.target.files && onImageUpload(e.target.files[0])}
       />
     </div>
