@@ -167,12 +167,12 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
                 <button
                   className="btn"
                   onClick={() =>
-                    document.getElementById("my_modal_2").showModal()
+                    document.getElementById(`my_modal_${index}`).showModal()
                   }
                 >
                   See recipe
                 </button>
-                <dialog id="my_modal_2" className="modal">
+                <dialog id={`my_modal_${index}`} className="modal ">
                   <div className="modal-box">
                     <h3 className="font-bold text-lg">{recipe.name}</h3>
                     <p className="py-4">
