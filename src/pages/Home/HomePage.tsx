@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 
-import { RecipeList, IngredientList } from "../../components";
+import {
+  RecipeList,
+  IngredientList,
+  FoodAndDrinkList,
+  DashboardIngredients,
+  DashboardFoodAndDrinks,
+} from "../../components";
 import { MdFastfood } from "react-icons/md";
 import { MdSpaceDashboard } from "react-icons/md";
 import { BiFridge } from "react-icons/bi";
@@ -8,6 +14,7 @@ import { BiSolidFridge } from "react-icons/bi";
 import { BiSolidFoodMenu } from "react-icons/bi";
 const HomePage: React.FC = () => {
   const [ingredients, setIngredients] = useState<string[]>([]);
+  const [items, setItems] = useState<string[]>([]);
   const [recipes, setRecipes] = useState<string[]>([]);
 
   const handleImageUpload = (file: File) => {};
@@ -19,10 +26,16 @@ const HomePage: React.FC = () => {
       <div className="drawer lg:drawer-open ">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
-          <IngredientList
+          <DashboardIngredients
             ingredients={ingredients}
             onImageUpload={handleImageUpload}
           />
+          <DashboardFoodAndDrinks
+            items={items}
+            onImageUpload={handleImageUpload}
+          />
+          <RecipeList recipes={recipes} />
+
           <label
             htmlFor="my-drawer-2"
             className="btn btn-primary drawer-button lg:hidden"
@@ -72,8 +85,6 @@ const HomePage: React.FC = () => {
           </ul>
         </div>
       </div>
-
-      <RecipeList recipes={recipes} />
     </div>
   );
 };

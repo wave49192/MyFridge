@@ -1,7 +1,7 @@
 import React from "react";
 import { IoMdAdd } from "react-icons/io";
-interface IngredientListProps {
-  ingredients: string[];
+interface FoodAndDrinkListProps {
+  items: string[];
   onImageUpload: (file: File) => void;
 }
 
@@ -10,61 +10,47 @@ interface Ingredient {
   imageUrl: string;
 }
 
-const IngredientList: React.FC<IngredientListProps> = ({
-  ingredients,
+const FoodAndDrinkList: React.FC<FoodAndDrinkListProps> = ({
+  items,
   onImageUpload,
 }) => {
-  const tempIngredients: Ingredient[] = [
+  const tempFood: Ingredient[] = [
     {
-      name: "Tomato",
+      name: "Egg",
       imageUrl:
-        "https://cdn.discordapp.com/attachments/787647617307770930/1196874418228559982/pexels-photo-533280.png?ex=65b9372a&is=65a6c22a&hm=0c5f0189fa23baef31f76751f344237957a4f61099c34cf4b6c8bd3003dc4eee&",
+        "https://i.insider.com/5919bca71442933b048b54be?width=750&format=jpeg&auto=webp",
     },
     {
-      name: "Cheese",
+      name: "Mansome",
       imageUrl:
-        "https://images-prod.healthline.com/hlcmsresource/images/AN_images/healthiest-cheese-1296x728-swiss.jpg",
+        "https://st-th-1.byteark.com/assets.punpro.com/contents/i3158/1552896966958-53343568_2235077149861959_2494202373392564224_o.jpg",
     },
     {
-      name: "Garlic",
-      imageUrl:
-        "https://assets-global.website-files.com/63ed08484c069d0492f5b0bc/6541526f7a196ff18cd6fdc8_6373b353b73006ad3fe81233_633611cb47a5327eddfa9ea4_garlic-blood-sugar-hero.jpeg",
-    },
-    {
-      name: "Garlic",
-      imageUrl:
-        "https://assets-global.website-files.com/63ed08484c069d0492f5b0bc/6541526f7a196ff18cd6fdc8_6373b353b73006ad3fe81233_633611cb47a5327eddfa9ea4_garlic-blood-sugar-hero.jpeg",
-    },
-    {
-      name: "Garlic",
-      imageUrl:
-        "https://assets-global.website-files.com/63ed08484c069d0492f5b0bc/6541526f7a196ff18cd6fdc8_6373b353b73006ad3fe81233_633611cb47a5327eddfa9ea4_garlic-blood-sugar-hero.jpeg",
+      name: "Water",
+      imageUrl: "https://pbs.twimg.com/media/FxsD9EEaMAAfzh8.jpg:large",
     },
   ];
 
   return (
     <div className="p-10">
       <h2 className="text-3xl cursor-default font-bold mb-4">
-        Ingredient List
+        Food and Drinks
       </h2>
       <div className="flex justify-between">
         <h3 className="text-xl cursor-default font-bold">
-          You have{" "}
-          <span className="text-red-700">{tempIngredients.length}</span>{" "}
-          ingredient(s) in your fridge
+          You have <span className="text-red-700">{tempFood.length}</span> Food
+          and Drink in your fridge
         </h3>
         <button
           className="btn btn-accent "
-          onClick={() =>
-            document.getElementById("addIngredientModal").showModal()
-          }
+          onClick={() => document.getElementById("addItemModal").showModal()}
         >
           <IoMdAdd size={14} />
         </button>
-        <dialog id="addIngredientModal" className="modal">
+        <dialog id="addItemModal" className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Upload Picture</h3>
-            <p className="py-4">Please upload your food ingredients picture</p>
+            <p className="py-4">Please upload your food or drink picture</p>
             <div className="modal-action flex flex-col">
               <input
                 type="file"
@@ -75,6 +61,8 @@ const IngredientList: React.FC<IngredientListProps> = ({
                 }
               />
               <form method="dialog" className="">
+                {/* Upload image button */}
+
                 {/* if there is a button in form, it will close the modal */}
                 <div className="flex justify-between mt-8">
                   <button type="submit" className="btn btn-accent">
@@ -88,14 +76,14 @@ const IngredientList: React.FC<IngredientListProps> = ({
         </dialog>
       </div>
       {/* Display the tempIngredients */}
-      <div className="flex w-full mb-3 overflow-x-auto mr-30">
-        {tempIngredients.map((tempIngredient, index) => (
+      <div className="flex w-full overflow-x-auto mr-30">
+        {tempFood.map((tempIngredient, index) => (
           <div
             key={index}
-            className="card w-50 h-26 bg-base-20 shadow-md border-2 border-neutral-200 mr-5 mb-3 "
+            className="card w-50 h-26 bg-base-20 shadow-md border-2 border-neutral-200 mr-5 mb-3  "
           >
             <figure></figure>
-            <div className="card-body p-12 ">
+            <div className="card-body p-12">
               <figure>
                 <img
                   src={tempIngredient.imageUrl}
@@ -114,4 +102,4 @@ const IngredientList: React.FC<IngredientListProps> = ({
   );
 };
 
-export default IngredientList;
+export default FoodAndDrinkList;
