@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# MyFridge Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MyFridge is a web application designed for efficient fridge management. It utilizes image recognition AI to identify ingredients added to the fridge, allowing users to keep track of their inventory. The app further enhances user experience by generating recipes based on the available ingredients, along with suggestions for general food and drinks commonly found in the fridge.  
+![image](https://github.com/wave49192/MyFridge/assets/49709972/1a5ae0d8-eacf-4e8e-9eee-50b5f5591a49)
 
-Currently, two official plugins are available:
+## Technologies Used
+- React.js
+- TypeScript
+- Vite
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+## Getting Started
+### Installation
+Clone the repository and navigate to the project directory:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
 ```
+git clone <repository-url>
+cd MyFridge
+```
+Install dependencies:
+```
+yarn
+```
+Start the development server:
+```
+yarn dev
+```
+## Features
+- Image Recognition: Upload ingredient pictures for AI detection.
+- Fridge Management: Keep track of ingredients in your fridge.
+- Recipe Generator: Generate recipes based on available ingredients.
+- General Suggestions: Receive suggestions for common food and drinks in the fridge.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Note
+**This project is currently in development, and only the frontend is included.**
