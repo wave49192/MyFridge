@@ -14,7 +14,7 @@ MyFridge is a web application designed for efficient fridge management. It utili
 Clone the repository and navigate to the project directory:
 
 ```
-git clone <repository-url>
+git clone https://github.com/wave49192/MyFridge.git
 cd MyFridge
 ```
 Install dependencies:
