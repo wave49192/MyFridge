@@ -145,7 +145,7 @@ const RecipeList: React.FC<RecipeListProps> = ({ recipes }) => {
                 className="w-14 h-14 object-cover rounded-lg mr-12"
                 alt={recipe.name}
               />
-              <div className="flex flex-col basis-1/2 justify-around">
+              <div className="flex flex-col basis-1/2 justify-around mr-6">
                 <p className="text-sm font-bold">{recipe.name}</p>
                 <p className="text-xs">{recipe.description}</p>
               </div>
