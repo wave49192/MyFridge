@@ -1,5 +1,7 @@
-import React from "react";
+import { animated, useTransition } from "@react-spring/web";
+import React, { useRef } from "react";
 import { IoMdAdd } from "react-icons/io";
+import { transitions } from "../../transitions/opacity";
 interface IngredientListProps {
   ingredients: string[];
   onImageUpload: (file: File) => void;
@@ -41,6 +43,7 @@ const IngredientList: React.FC<IngredientListProps> = ({
         "https://assets-global.website-files.com/63ed08484c069d0492f5b0bc/6541526f7a196ff18cd6fdc8_6373b353b73006ad3fe81233_633611cb47a5327eddfa9ea4_garlic-blood-sugar-hero.jpeg",
     },
   ];
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   return (
     <div className="p-10">
@@ -55,13 +58,15 @@ const IngredientList: React.FC<IngredientListProps> = ({
         </h3>
         <button
           className="btn btn-accent "
-          onClick={() =>
-            document.getElementById("addIngredientModal").showModal()
-          }
+          onClick={() => {
+            if (dialogRef.current) {
+              dialogRef.current.showModal();
+            }
+          }}
         >
           <IoMdAdd size={14} />
         </button>
-        <dialog id="addIngredientModal" className="modal">
+        <dialog ref={dialogRef} className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Upload Picture</h3>
             <p className="py-4">Please upload your food ingredients picture</p>
@@ -89,25 +94,25 @@ const IngredientList: React.FC<IngredientListProps> = ({
       </div>
       {/* Display the tempIngredients */}
       <div className="flex w-full mb-3 overflow-x-auto mr-30">
-        {tempIngredients.map((tempIngredient, index) => (
-          <div
-            key={index}
+        {transitions(tempIngredients)((style, item) => (
+          <animated.div
+            style={style}
             className="card w-50 h-26 bg-base-20 shadow-md border-2 border-neutral-200 mr-5 mb-3 "
           >
             <figure></figure>
             <div className="card-body p-12 ">
               <figure>
                 <img
-                  src={tempIngredient.imageUrl}
-                  alt={tempIngredient.name}
+                  src={item.imageUrl}
+                  alt={item.name}
                   className="w-20 h-28 object-cover mask mask-squircle"
                 />
               </figure>
               <p className="card-title self-center text-xs">
-                {tempIngredient.name}
+                {item.name}
               </p>
             </div>
-          </div>
+          </animated.div>
         ))}
       </div>
     </div>

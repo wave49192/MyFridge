@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import { IoMdAdd } from "react-icons/io";
+import { transitions } from "../../transitions/opacity";
+import { animated } from "@react-spring/web";
 interface FoodAndDrinkListProps {
   items: string[];
   onImageUpload: (file: File) => void;
@@ -30,6 +32,7 @@ const FoodAndDrinkList: React.FC<FoodAndDrinkListProps> = ({
       imageUrl: "https://pbs.twimg.com/media/FxsD9EEaMAAfzh8.jpg:large",
     },
   ];
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   return (
     <div className="p-10">
@@ -43,11 +46,15 @@ const FoodAndDrinkList: React.FC<FoodAndDrinkListProps> = ({
         </h3>
         <button
           className="btn btn-accent "
-          onClick={() => document.getElementById("addItemModal").showModal()}
+          onClick={() => {
+            if (dialogRef.current) {
+              dialogRef.current.showModal()
+            }
+          }}
         >
           <IoMdAdd size={14} />
         </button>
-        <dialog id="addItemModal" className="modal">
+        <dialog ref={dialogRef} className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-lg">Upload Picture</h3>
             <p className="py-4">Please upload your food or drink picture</p>
@@ -77,25 +84,25 @@ const FoodAndDrinkList: React.FC<FoodAndDrinkListProps> = ({
       </div>
       {/* Display the tempIngredients */}
       <div className="flex w-full overflow-x-auto mr-30">
-        {tempFood.map((tempIngredient, index) => (
-          <div
-            key={index}
+        {transitions(tempFood)((style, item) => (
+          <animated.div
+            style={style}
             className="card w-50 h-26 bg-base-20 shadow-md border-2 border-neutral-200 mr-5 mb-3  "
           >
             <figure></figure>
             <div className="card-body p-12">
               <figure>
                 <img
-                  src={tempIngredient.imageUrl}
-                  alt={tempIngredient.name}
+                  src={item.imageUrl}
+                  alt={item.name}
                   className="w-20 h-28 object-cover mask mask-squircle"
                 />
               </figure>
               <p className="card-title self-center text-xs">
-                {tempIngredient.name}
+                {item.name}
               </p>
             </div>
-          </div>
+          </animated.div>
         ))}
       </div>
     </div>
