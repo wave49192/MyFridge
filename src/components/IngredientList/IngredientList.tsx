@@ -56,20 +56,34 @@ const IngredientList: React.FC<IngredientListProps> = ({
           <span className="text-red-700">{tempIngredients.length}</span>{" "}
           ingredient(s) in your fridge
         </h3>
-        <button
-          className="btn btn-accent "
-          onClick={() => {
-            if (dialogRef.current) {
-              dialogRef.current.showModal();
-            }
-          }}
-        >
-          <IoMdAdd size={14} />
+        <button className="btn-accent dropdown dropdown-bottom dropdown-end">
+          <div tabIndex={0} role="button" className="btn m-1">
+            <IoMdAdd size={14} />
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <a
+                onClick={() => {
+                  if (dialogRef.current) {
+                    dialogRef.current.showModal();
+                  }
+                }}
+              >
+                Upload Image
+              </a>
+            </li>
+            <li>
+              <a>Select Ingredients</a>
+            </li>
+          </ul>
         </button>
         <dialog ref={dialogRef} className="modal">
           <div className="modal-box">
-            <h3 className="font-bold text-lg">Upload Picture</h3>
-            <p className="py-4">Please upload your food ingredients picture</p>
+            <h3 className="font-bold text-lg">Upload Image</h3>
+            <p className="py-4">Please upload your food ingredients image</p>
             <div className="modal-action flex flex-col">
               <input
                 type="file"
@@ -108,9 +122,7 @@ const IngredientList: React.FC<IngredientListProps> = ({
                   className="w-20 h-28 object-cover mask mask-squircle"
                 />
               </figure>
-              <p className="card-title self-center text-xs">
-                {item.name}
-              </p>
+              <p className="card-title self-center text-xs">{item.name}</p>
             </div>
           </animated.div>
         ))}
