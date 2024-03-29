@@ -17,21 +17,21 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
           </a>
           <a
             className={`btn btn-ghost text-m rounded-full ${
-              isAtPage === "Dashboard" ? "text-blue-500 text-white" : ""
+              isAtPage === "Dashboard" ? "bg-primary text-white" : ""
             }`}
           >
             Dashboard
           </a>
           <a
             className={`btn btn-ghost text-m rounded-full ${
-              isAtPage === "Inventory" ? "text-blue-500 text-white" : ""
+              isAtPage === "Inventory" ? "bg-primary text-white" : ""
             }`}
           >
             Inventory
           </a>
           <a
             className={`btn btn-ghost text-m rounded-full ${
-              isAtPage === "Recipes" ? "text-blue-500 text-white" : ""
+              isAtPage === "Recipes" ? "bg-primary text-white" : ""
             }`}
           >
             Recipes
