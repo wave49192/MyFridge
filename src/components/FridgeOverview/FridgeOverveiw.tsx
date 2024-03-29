@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import "./FridgeOverview.css";
 
 interface FoodItem {
@@ -5,13 +6,39 @@ interface FoodItem {
 }
 
 const FridgeOverview: React.FC = () => {
+  const [currentComponent, setCurrentComponent] = useState<
+    "Food" | "Ingredients"
+  >("Food");
+  const [isLaptopScreen, setIsLaptopScreen] = useState<boolean>(true);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    setIsLaptopScreen(mediaQuery.matches);
+
+    const handleResize = (e: MediaQueryListEvent) => {
+      setIsLaptopScreen(e.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleResize);
+    return () => {
+      mediaQuery.removeEventListener("change", handleResize);
+    };
+  }, []);
+
   const foodItems: FoodItem[] = [
     { name: "Onion" },
-    { name: "Onion" },
-    { name: "Onion" },
-    { name: "Onion" },
-    { name: "Onion" },
+    { name: "Tomato" },
+    { name: "Apple" },
+    { name: "Apple" },
   ];
+
+  const showFoodComponent = () => {
+    setCurrentComponent("Food");
+  };
+
+  const showIngredientsComponent = () => {
+    setCurrentComponent("Ingredients");
+  };
 
   return (
     <div className="mx-5 bg-base-100 p-4 rounded-md shadow-md justify-center">
@@ -22,24 +49,61 @@ const FridgeOverview: React.FC = () => {
             <p className="text-md underline">View All</p>
           </a>
         </div>
-        <div className="join grid grid-cols-2">
-          <button className="join-item btn custom-disabled btn-outline rounded-full bg-primary text-xl text-white">
-            &lt;
-          </button>
-          <button className="join-item btn btn-outline rounded-full bg-primary text-xl text-white">
-            &gt;
-          </button>
-        </div>
-      </div>
-      <div className="space-y-2 bg-primary-2 bg-opacity-25 p-4 rounded-lg">
-        <h1 className="text-secondary font-bold text-xl ">Food and Drinks</h1>
-        You have <span className="text-primary">3</span> food(s) and drinks(s)
-        in your fridge{" "}
-        {foodItems.map((item, index) => (
-          <div key={index} className="flex px-4 py-2 bg-primary-2 rounded-lg">
-            <p>{item.name}</p>
+        {!isLaptopScreen && (
+          <div className="laptop:hidden join grid grid-cols-2">
+            <button
+              onClick={showFoodComponent}
+              className={`join-item btn btn-outline rounded-full bg-primary text-xl text-white 
+            ${currentComponent === "Food" ? "custom-disabled" : ""}`}
+            >
+              &lt;
+            </button>
+            <button
+              onClick={showIngredientsComponent}
+              className={`join-item btn btn-outline rounded-full bg-primary text-xl text-white 
+            ${currentComponent === "Ingredients" ? "custom-disabled" : ""}`}
+            >
+              &gt;
+            </button>
           </div>
-        ))}
+        )}
+      </div>
+      <div className="laptop:flex">
+        <div
+          className={`space-y-2 bg-primary-2 bg-opacity-25 p-4 rounded-lg mb-5 laptop:flex-1 laptop:mr-12 ${
+            currentComponent === "Food" ? "" : isLaptopScreen ? "" : "hidden"
+          }`}
+        >
+          <h1 className="text-secondary font-bold text-xl">Food and Drinks</h1>
+          You have <span className="text-primary">{foodItems.length}</span>{" "}
+          food(s) and drink(s) in your fridge
+          {foodItems.map((item, index) => (
+            <div key={index} className="flex px-4 py-2 bg-primary-2 rounded-lg">
+              <p>{item.name}</p>
+            </div>
+          ))}
+        </div>
+        <div
+          className={`space-y-2 bg-secondary-green bg-opacity-15 p-4 mb-5 rounded-lg laptop:flex-1 ${
+            currentComponent === "Ingredients"
+              ? ""
+              : isLaptopScreen
+              ? ""
+              : "hidden"
+          }`}
+        >
+          <h1 className="text-secondary font-bold text-xl">Ingredients</h1>
+          You have <span className="text-primary">{foodItems.length}</span>{" "}
+          ingredient(s) in your fridge
+          {foodItems.map((item, index) => (
+            <div
+              key={index}
+              className="flex px-4 py-2 bg-secondary bg-opacity-30 rounded-lg"
+            >
+              <p>{item.name}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
