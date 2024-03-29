@@ -8,7 +8,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: (
-      <html data-theme="cupcake">
+      <html data-theme="emmy">
         <App />
       </html>
     ),

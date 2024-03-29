@@ -6,7 +6,22 @@ module.exports = {
   },
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "bumblebee", "cupcake"], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
+    themes: [
+      {
+        emmy: {
+          primary: "#EE7214",
+          "primary-content": "F7B787",
+          secondary: "#527853",
+          accent: "#362706",
+          neutral: "#3D4451",
+          "base-100": "#FFFFFF",
+        },
+      },
+      "light",
+      "dark",
+      "bumblebee",
+      "cupcake",
+    ], // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
     darkTheme: "dark", // name of one of the included themes for dark mode
     base: true, // applies background color and foreground color for root element by default
     styled: true, // include daisyUI colors and design decisions for all components
