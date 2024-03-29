@@ -5,8 +5,8 @@ import { Navbar, RecipeList } from "../../components";
 const HomePage: React.FC = () => {
   return (
     <div>
-      <Navbar />
-      {/* <RecipeList /> */}
+      <Navbar isAtPage="Home" />
+      <RecipeList />
     </div>
   );
 };

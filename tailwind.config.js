@@ -3,7 +3,7 @@ module.exports = {
   content: ["./index.html", , "./src/**/*.{html,js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      mobile: "425px",
+      mobile: { min: "320px", max: "426px" },
       // => @media (min-width: 640px) { ... }
 
       laptop: "1024px",
@@ -13,6 +13,15 @@ module.exports = {
       // => @media (min-width: 1280px) { ... }
     },
     extend: {},
+  },
+
+  colors: {
+    primary: "#EE7214",
+    "primary-content": "F7B787",
+    secondary: "#527853",
+    accent: "#362706",
+    neutral: "#3D4451",
+    "base-100": "#FFFFFF",
   },
 
   plugins: [require("daisyui")],
