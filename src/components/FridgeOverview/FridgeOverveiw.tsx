@@ -30,6 +30,18 @@ const FridgeOverview: React.FC = () => {
     { name: "Tomato" },
     { name: "Apple" },
     { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
+    { name: "Apple" },
   ];
 
   const showFoodComponent = () => {
@@ -45,9 +57,9 @@ const FridgeOverview: React.FC = () => {
       <div className="flex items-center mb-2 justify-between">
         <div className="flex">
           <h1 className="text-2xl font-bold">Overview Fridge</h1>
-          <a href="" className="mt-2 ml-3">
+          {/* <a href="" className="mt-2 ml-3">
             <p className="text-md underline">View All</p>
-          </a>
+          </a> */}
         </div>
         {!isLaptopScreen && (
           <div className="laptop:hidden join grid grid-cols-2">
@@ -77,11 +89,16 @@ const FridgeOverview: React.FC = () => {
           <h1 className="text-secondary font-bold text-xl">Food and Drinks</h1>
           You have <span className="text-primary">{foodItems.length}</span>{" "}
           food(s) and drink(s) in your fridge
-          {foodItems.map((item, index) => (
-            <div key={index} className="flex px-4 py-2 bg-primary-2 rounded-lg">
-              <p>{item.name}</p>
-            </div>
-          ))}
+          <div className="overflow-y-scroll mobile:max-h-[240px] laptop:max-h-[400px] hide-scrollbar">
+            {foodItems.map((item, index) => (
+              <div
+                key={index}
+                className="flex px-4 py-2 my-2 bg-primary-2 rounded-lg"
+              >
+                <p>{item.name}</p>
+              </div>
+            ))}
+          </div>
         </div>
         <div
           className={`space-y-2 bg-secondary-green bg-opacity-15 p-4 mb-5 rounded-lg laptop:flex-1 ${
@@ -95,14 +112,16 @@ const FridgeOverview: React.FC = () => {
           <h1 className="text-secondary font-bold text-xl">Ingredients</h1>
           You have <span className="text-primary">{foodItems.length}</span>{" "}
           ingredient(s) in your fridge
-          {foodItems.map((item, index) => (
-            <div
-              key={index}
-              className="flex px-4 py-2 bg-secondary bg-opacity-30 rounded-lg"
-            >
-              <p>{item.name}</p>
-            </div>
-          ))}
+          <div className="overflow-y-scroll mobile:max-h-[240px] laptop:max-h-[400px] hide-scrollbar">
+            {foodItems.map((item, index) => (
+              <div
+                key={index}
+                className="flex px-4 py-2 my-2 bg-secondary bg-opacity-30 rounded-lg"
+              >
+                <p>{item.name}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
