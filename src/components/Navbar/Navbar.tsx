@@ -9,7 +9,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
       <div className="navbar sticky top-0 z-50 justify-center">
         <div className="self-center rounded-full backdrop-blur-xl bg-white/30 p-3">
           <a
-            className={`btn btn-ghost text-m rounded-full ${
+            className={`btn btn-ghost text-m rounded-full laptop:mx-3 ${
               isAtPage === "Home"
                 ? "bg-primary text-white hover:bg-primary"
                 : ""
@@ -18,7 +18,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
             Home
           </a>
           <a
-            className={`btn btn-ghost text-m rounded-full ${
+            className={`btn btn-ghost text-m rounded-full laptop:mx-3 ${
               isAtPage === "Dashboard"
                 ? "bg-primary text-white hover:bg-primary"
                 : ""
@@ -27,7 +27,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
             Dashboard
           </a>
           <a
-            className={`btn btn-ghost text-m rounded-full ${
+            className={`btn btn-ghost text-m rounded-full laptop:mx-3 ${
               isAtPage === "Inventory"
                 ? "bg-primary text-white hover:bg-primary"
                 : ""
@@ -36,7 +36,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
             Inventory
           </a>
           <a
-            className={`btn btn-ghost text-m rounded-full ${
+            className={`btn btn-ghost text-m rounded-full laptop:mx-3 ${
               isAtPage === "Recipes"
                 ? "bg-primary text-white hover:bg-primary"
                 : ""
