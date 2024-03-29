@@ -7,7 +7,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
   return (
     <>
       <div className="navbar sticky top-0 z-50 justify-center">
-        <div className="self-center rounded-full backdrop-blur-xl bg-white/30">
+        <div className="self-center rounded-full backdrop-blur-xl bg-white/30 py-3 px-5">
           <a
             className={`btn btn-ghost text-m rounded-full ${
               isAtPage === "Home" ? "bg-primary text-white" : ""
