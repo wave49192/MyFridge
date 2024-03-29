@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 interface NavbarNavigation {
   isAtPage?: string;
@@ -46,7 +46,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
               <div className="w-10 rounded-full">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  src="https://dogtime.com/wp-content/uploads/sites/12/2023/11/GettyImages-1329412827-e1701097258260.jpg?w=1024"
                 />
               </div>
             </div>

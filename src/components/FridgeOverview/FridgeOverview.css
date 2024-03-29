@@ -1,0 +1,9 @@
+/* Custom color utility */
+.custom-disabled {
+    /* Your custom styles for the disabled button */
+    opacity: 0.7;
+    /* Example: reduce opacity */
+    cursor: not-allowed;
+    /* Example: change cursor */
+    /* Add any other styles you want */
+}
