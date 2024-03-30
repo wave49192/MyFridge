@@ -8,18 +8,30 @@ const RecommendedRecipe = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/recipes/");
-        setRecipes(response.data);
-        setLoading(false); // Mark loading as complete
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+    // Check if recipes exist in local storage
+    const storedRecipes = localStorage.getItem("recipes");
+    if (storedRecipes) {
+      const parsedRecipes = JSON.parse(storedRecipes);
+      const slicedRecipes = parsedRecipes.slice(0, 20); // Slice only the first 20 recipes
+      setRecipes(slicedRecipes);
+      setLoading(false);
+    } else {
+      fetchData(); // Fetch data from API if not found in local storage
+    }
   }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("http://127.0.0.1:8000/recipes/");
+      const slicedRecipes = response.data.slice(0, 20); // Slice only the first 20 recipes
+      setRecipes(slicedRecipes);
+      setLoading(false);
+      // Store sliced recipes in local storage
+      localStorage.setItem("recipes", JSON.stringify(slicedRecipes));
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <div className="m-6">
