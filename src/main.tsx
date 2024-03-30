@@ -6,6 +6,7 @@ import DashboardPage from "./pages/Dashboard/DashboardPage.tsx";
 import RecipesPage from "./pages/Recipes/RecipesPage.tsx";
 import HomePage from "./pages/Home/HomePage.tsx";
 import InventoryPage from "./pages/Inventory/InventoryPage.tsx";
+import RecipeDetailsPage from "./pages/Recipes/RecipeDetailsPage.tsx";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -40,6 +41,14 @@ ReactDOM.render(
           element={
             <html data-theme="emmy">
               <InventoryPage />
+            </html>
+          }
+        />
+        <Route
+          path="/recipe/:recipeId"
+          element={
+            <html data-theme="emmy">
+              <RecipeDetailsPage />
             </html>
           }
         />
