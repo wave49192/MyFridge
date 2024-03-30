@@ -6,12 +6,12 @@ module.exports = {
       mobile: { min: "320px", max: "426px" },
       // => @media (min-width: 640px) { ... }
 
-      laptop: "1024px",
-      // => @media (min-width: 1024px) { ... }
-
-      desktop: "1280px",
+      laptop: "427px",
       // => @media (min-width: 1280px) { ... }
+
+      desktop: "1025px",
     },
+
     extend: {},
     colors: {
       primary: "#EE7214",

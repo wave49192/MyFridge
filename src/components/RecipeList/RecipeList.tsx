@@ -55,15 +55,15 @@ const RecipeList: React.FC<RecipeListProps> = ({
   }
 
   return (
-    <div className="pb-4">
+    <div className="grid grid-cols-1 gap-4 laptop:grid-cols-2 desktop:grid-cols-3">
       {recipes.map((recipe) => (
         <Link to={`/recipe/${recipe.recipe_id}`} key={recipe.recipe_id}>
-          <div className="card card-side bg-base-100 m-2 h-48">
+          <div className="card card-side bg-base-100 h-48">
             <figure>
               <img
                 src={recipe.image_url}
                 alt={recipe.title}
-                className="rounded-2xl mobile:w-32 mobile:h-48"
+                className="rounded-2xl mobile:w-32 mobile:h-48 laptop:w-48 laptop:h-48"
                 onError={(e) => {
                   // Display placeholder image if original image fails to load
                   e.currentTarget.src = placeholderImage;

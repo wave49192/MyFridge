@@ -12,7 +12,7 @@ const FridgeOverview: React.FC = () => {
   const [isLaptopScreen, setIsLaptopScreen] = useState<boolean>(true);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(min-width: 1024px)");
+    const mediaQuery = window.matchMedia("(min-width: 427px)");
     setIsLaptopScreen(mediaQuery.matches);
 
     const handleResize = (e: MediaQueryListEvent) => {

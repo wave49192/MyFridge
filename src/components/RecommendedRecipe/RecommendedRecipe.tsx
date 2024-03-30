@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { RecipeList } from "..";
 import placeholderImage from "../../assets/food-placeholder.png"; // Import placeholder image
@@ -35,7 +35,7 @@ const RecommendedRecipe = () => {
 
   return (
     <div className="m-6">
-      <h1 className="text-accent font-bold mobile:text-xl">
+      <h1 className="text-accent font-bold mobile:text-xl laptop:text-3xl laptop:mb-8">
         Recommended For you
       </h1>
       {/* Pass fetched recipes data as props to RecipeList */}
