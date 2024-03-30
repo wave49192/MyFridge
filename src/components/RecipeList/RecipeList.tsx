@@ -46,7 +46,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
               </div>
             </div>
             <p className="flex-end text-xs text-end items-end">
-              Cooking Time: <span className="text-primary">Loading mins</span>
+              Cooking Time: <span className="text-primary">Loading...</span>
             </p>
           </div>
         </div>
