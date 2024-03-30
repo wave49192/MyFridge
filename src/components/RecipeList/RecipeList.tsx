@@ -11,51 +11,38 @@ interface Recipe {
   ingredients: string[];
   cuisine_type: string;
 }
+
 interface RecipeListProps {
   loading: boolean;
   recipes: Recipe[];
   placeholderImage: string;
+  isShowOneRecipeCols: boolean;
 }
 
 const RecipeList: React.FC<RecipeListProps> = ({
   loading,
   recipes,
   placeholderImage,
+  isShowOneRecipeCols,
 }) => {
   if (loading) {
     return (
       <div className="m-2 flex justify-center">
         <div className="card card-side bg-base-100 h-48 w-80">
-          <figure>
-            <img
-              src={placeholderImage}
-              alt="Loading..."
-              className="rounded-2xl mobile:w-32 mobile:h-48"
-            />
-          </figure>
-          <div className="pl-3 w-[239px] flex-col justify-end">
-            <div>
-              <h2 className="text-xl font-bold text-secondary-green text-ellipsis overflow-hidden line-clamp-2">
-                Loading...
-              </h2>
-              <div className="badge badge-primary text-white">Loading...</div>
-              <div className="flex-1">
-                <p className="text-ellipsis overflow-hidden line-clamp-4">
-                  Loading...
-                </p>
-              </div>
-            </div>
-            <p className="flex-end text-xs text-end items-end">
-              Cooking Time: <span className="text-primary">Loading...</span>
-            </p>
-          </div>
+          {/* Loading content */}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 gap-4 laptop:grid-cols-2 desktop:grid-cols-3">
+    <div
+      className={`grid gap-4 ${
+        isShowOneRecipeCols
+          ? "grid-cols-1"
+          : "laptop:grid-cols-2 desktop:grid-cols-3 hd:grid-cols-4"
+      }`}
+    >
       {recipes.map((recipe) => (
         <Link to={`/recipe/${recipe.recipe_id}`} key={recipe.recipe_id}>
           <div className="card card-side bg-base-100 h-48">

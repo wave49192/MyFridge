@@ -10,6 +10,7 @@ module.exports = {
       // => @media (min-width: 1280px) { ... }
 
       desktop: "1025px",
+      hd: "1440px",
     },
 
     extend: {},

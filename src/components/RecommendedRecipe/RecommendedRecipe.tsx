@@ -3,7 +3,12 @@ import axios from "axios";
 import { RecipeList } from "..";
 import placeholderImage from "../../assets/food-placeholder.png"; // Import placeholder image
 
-const RecommendedRecipe = () => {
+interface RecommendedRecipeInterface {
+  isInRecipeDetailsPage: boolean;
+}
+const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
+  isInRecipeDetailsPage,
+}) => {
   const [loading, setLoading] = useState(true);
   const [recipes, setRecipes] = useState([]);
 
@@ -43,6 +48,7 @@ const RecommendedRecipe = () => {
         loading={loading}
         recipes={recipes}
         placeholderImage={placeholderImage}
+        isShowOneRecipeCols={isInRecipeDetailsPage}
       />
     </div>
   );

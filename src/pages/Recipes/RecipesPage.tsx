@@ -89,6 +89,7 @@ const RecipesPage: React.FC = () => {
             loading={isLoading}
             recipes={searchResults}
             placeholderImage={placeholderImage}
+            isShowOneRecipeCols={false}
           />
         </div>
       </div>
