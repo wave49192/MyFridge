@@ -7,10 +7,3 @@
     /* Your custom styles for the disabled button */
     opacity: 0.5;
 }
-
-/* Inside your tailwind.config.css file */
-@layer utilities {
-    .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-    }
-}

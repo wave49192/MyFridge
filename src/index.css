@@ -20,3 +20,9 @@ code {
 .a-tag-style {
     @apply my-2 hover:underline;
 }
+
+@layer utilities {
+    .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+}

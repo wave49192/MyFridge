@@ -17,6 +17,7 @@ interface RecipeListProps {
   recipes: Recipe[];
   placeholderImage: string;
   isShowOneRecipeCols: boolean;
+  screenHeight?: number;
 }
 
 const RecipeList: React.FC<RecipeListProps> = ({
@@ -24,13 +25,12 @@ const RecipeList: React.FC<RecipeListProps> = ({
   recipes,
   placeholderImage,
   isShowOneRecipeCols,
+  screenHeight = 0,
 }) => {
   if (loading) {
     return (
       <div className="m-2 flex justify-center">
-        <div className="card card-side bg-base-100 h-48 w-80">
-          {/* Loading content */}
-        </div>
+        <div className="card card-side bg-base-100 h-48 w-80">loading..</div>
       </div>
     );
   }
@@ -39,9 +39,12 @@ const RecipeList: React.FC<RecipeListProps> = ({
     <div
       className={`grid gap-4 ${
         isShowOneRecipeCols
-          ? "grid-cols-1"
+          ? "grid-cols-1 overflow-y-auto hide-scrollbar"
           : "laptop:grid-cols-2 desktop:grid-cols-3"
       }`}
+      style={{
+        maxHeight: isShowOneRecipeCols ? `${screenHeight - 200}px` : "none",
+      }}
     >
       {recipes.map((recipe) => (
         <Link to={`/recipe/${recipe.recipe_id}`} key={recipe.recipe_id}>

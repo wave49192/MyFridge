@@ -5,9 +5,12 @@ import placeholderImage from "../../assets/food-placeholder.png"; // Import plac
 
 interface RecommendedRecipeInterface {
   isInRecipeDetailsPage: boolean;
+  screenHeight?: number; // New prop for screen height
 }
+
 const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
   isInRecipeDetailsPage,
+  screenHeight, // Receive screen height as prop
 }) => {
   const [loading, setLoading] = useState(true);
   const [recipes, setRecipes] = useState([]);
@@ -39,7 +42,10 @@ const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
   };
 
   return (
-    <div className="m-6">
+    <div
+      className={`${isInRecipeDetailsPage ? "mx-6 " : "m-6"}`}
+      style={{ overflowY: isInRecipeDetailsPage ? "scroll" : "visible" }}
+    >
       <h1 className="text-accent font-bold mobile:text-xl laptop:text-3xl laptop:mb-8">
         Recommended For you
       </h1>
@@ -49,6 +55,7 @@ const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
         recipes={recipes}
         placeholderImage={placeholderImage}
         isShowOneRecipeCols={isInRecipeDetailsPage}
+        screenHeight={screenHeight} // Pass screen height to RecipeList
       />
     </div>
   );

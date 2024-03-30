@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", , "./src/**/*.{html,js,ts,jsx,tsx}"],
+
   theme: {
     screens: {
       mobile: { min: "320px", max: "426px" },

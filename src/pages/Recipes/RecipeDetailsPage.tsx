@@ -57,88 +57,99 @@ const RecipeDetailsPage: React.FC = () => {
   const ingredientsArray = recipe.ingredients.split(",");
 
   return (
-    <div className="hd:flex">
-      <div className="flex flex-col min-h-screen justify-between bg-white text-accent flex-1">
-        <Navbar isAtPage="Recipes" />
-        <div className="flex-grow">
-          <img
-            src={recipe.image_url}
-            alt={recipe.title}
-            className="w-full h-[300px] laptop:h-[460px] desktop:h-[550px] desktop:mx-auto object-cover"
-          />
-          <div className="p-5">
-            <h2 className="text-3xl laptop:text-4xl font-bold mb-1 text-secondary-green">
-              {recipe.title}
-            </h2>
-            <p className="text-lg laptop:text-2xl mb-5 font-semibold">
-              By<span className="text-primary"> {recipe.publisher}</span>
-            </p>
-            <div className="flex flex-wrap mb-3">
-              <div className="badge badge-primary p-3 mb-3 mr-3 text-white">
-                {recipe.cuisine_type}
+    <>
+      <Navbar isAtPage="Recipes" />
+
+      <div className="hd:flex hd:mx-40">
+        <div className="flex flex-col min-h-screen justify-between bg-white text-accent flex-1 hd:flex-3">
+          <div className="flex-grow">
+            <img
+              src={recipe.image_url}
+              alt={recipe.title}
+              className="w-full h-[300px] laptop:h-[460px] desktop:h-[550px] desktop:mx-auto object-cover hd:rounded-3xl"
+            />
+            <div className="p-5">
+              <h2 className="text-3xl laptop:text-4xl font-bold mb-1 text-secondary-green">
+                {recipe.title}
+              </h2>
+              <p className="text-lg laptop:text-2xl mb-5 font-semibold">
+                By<span className="text-primary"> {recipe.publisher}</span>
+              </p>
+              <div className="flex flex-wrap mb-3">
+                <div className="badge badge-primary p-3 mb-3 mr-3 text-white">
+                  {recipe.cuisine_type}
+                </div>
+                <div className="badge badge-primary p-3 mb-3 mr-3 text-white">
+                  {recipe.cuisine_type}
+                </div>
+                <div className="badge badge-primary p-3 mb-3 mr-3 text-white">
+                  {recipe.cuisine_type}
+                </div>
               </div>
-              <div className="badge badge-primary p-3 mb-3 mr-3 text-white">
-                {recipe.cuisine_type}
-              </div>
-              <div className="badge badge-primary p-3 mb-3 mr-3 text-white">
-                {recipe.cuisine_type}
-              </div>
-            </div>
-            <p className="text-md mb-2 font-semibold laptop:text-xl">
-              Cooking Time:{" "}
-              <span className="text-md text-primary">
-                {recipe.cooking_time} mins
-              </span>
-            </p>
-            <div className="w-full md:w-96 bg-base-100 shadow-xl bg-primary-2 bg-opacity-25">
-              <div className="card-body">
-                <div className="text-lg">
-                  <div className="text-center mb-4 font-bold text-primary opacity-75 laptop:text-2xl">
-                    RECIPE INGREDIENTS
+              <p className="text-md mb-2 font-semibold laptop:text-xl">
+                Cooking Time:{" "}
+                <span className="text-md text-primary">
+                  {recipe.cooking_time} mins
+                </span>
+              </p>
+              <div className="w-full md:w-96 bg-base-100 shadow-xl bg-primary-2 bg-opacity-25">
+                <div className="card-body">
+                  <div className="text-lg">
+                    <div className="text-center mb-4 font-bold text-primary opacity-75 laptop:text-2xl">
+                      RECIPE INGREDIENTS
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-1 laptop:grid-cols-2 desktop:grid-cols-3">
+                    {ingredientsArray.map((ingredient, index) => (
+                      <div
+                        key={index}
+                        className="justify-between laptop:text-xl laptop:mb-5 desktop:mb-10 laptop:ml-10 desktop:ml-30"
+                      >
+                        <p className="opacity-75">
+                          <span className="text-primary"> &#10003;</span>{" "}
+                          <span className="text-accent ">{ingredient}</span>
+                        </p>
+                        {index !== ingredientsArray.length &&
+                          !isLaptopScreen && (
+                            <hr className="w-full border-t border-gray-200 my-1 opacity-20" />
+                          )}
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 laptop:grid-cols-2 desktop:grid-cols-3">
-                  {ingredientsArray.map((ingredient, index) => (
-                    <div
-                      key={index}
-                      className="justify-between laptop:text-xl laptop:mb-5 desktop:mb-10 laptop:ml-10 desktop:ml-30"
-                    >
-                      <p className="opacity-75">
-                        <span className="text-primary"> &#10003;</span>{" "}
-                        <span className="text-accent ">{ingredient}</span>
-                      </p>
-                      {index !== ingredientsArray.length && !isLaptopScreen && (
-                        <hr className="w-full border-t border-gray-200 my-1 opacity-20" />
-                      )}
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </div>
-        </div>
-        <footer className="p-8 bg-secondary text-white bg-opacity-85">
-          <div className="max-w-screen-md mx-auto">
-            <h6 className="text-center text-white font-bold mb-3">
-              STEP TO COOK
-            </h6>
-            <p className="laptop:text-center">
-              This recipe was crafted and verified by the culinary experts. For
-              detailed instructions, please visit their website.
-            </p>
-            <div className="mt-4 flex justify-center">
-              <a
-                className="btn btn-primary text-white"
-                href={recipe.source_url}
-              >
-                Click Here
-              </a>
+          <footer className="p-8 bg-secondary text-white bg-opacity-85 hd:rounded-full hd:mb-10">
+            <div className="max-w-screen-md mx-auto">
+              <h6 className="text-center text-white font-bold mb-3 ">
+                STEP TO COOK
+              </h6>
+              <p className="laptop:text-center">
+                This recipe was crafted and verified by the culinary experts.
+                For detailed instructions, please visit their website.
+              </p>
+              <div className="mt-4 flex justify-center">
+                <a
+                  className="btn btn-primary text-white"
+                  href={recipe.source_url}
+                >
+                  Click Here
+                </a>
+              </div>
             </div>
+          </footer>
+        </div>
+        {isHDScreen && (
+          <div className="hd:ml-4">
+            <RecommendedRecipe
+              isInRecipeDetailsPage={true}
+              screenHeight={1494}
+            />
           </div>
-        </footer>
+        )}
       </div>
-      {isHDScreen && <RecommendedRecipe isInRecipeDetailsPage={true} />}
-    </div>
+    </>
   );
 };
 
