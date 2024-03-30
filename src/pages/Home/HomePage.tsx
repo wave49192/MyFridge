@@ -6,7 +6,6 @@ const HomePage: React.FC = () => {
   return (
     <div>
       <Navbar isAtPage="Home" />
-      <RecipeList />
     </div>
   );
 };
