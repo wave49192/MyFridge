@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, RecipeList } from "../../components";
+import { Navbar, RecommendedRecipe } from "../../components";
 import FridgeOverview from "../../components/FridgeOverview/FridgeOverveiw";
 
 const DashboardPage: React.FC = () => {
@@ -10,7 +10,7 @@ const DashboardPage: React.FC = () => {
         Dashboard
       </h1>
       <FridgeOverview />
-      <RecipeList />
+      <RecommendedRecipe />
     </>
   );
 };

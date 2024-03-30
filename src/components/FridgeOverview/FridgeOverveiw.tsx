@@ -93,7 +93,7 @@ const FridgeOverview: React.FC = () => {
             {foodItems.map((item, index) => (
               <div
                 key={index}
-                className="flex px-4 py-2 my-2 bg-primary-2 rounded-lg"
+                className="flex px-4 py-2 my-2 bg-primary-2 rounded-lg laptop:text-xl"
               >
                 <p>{item.name}</p>
               </div>
@@ -116,7 +116,7 @@ const FridgeOverview: React.FC = () => {
             {foodItems.map((item, index) => (
               <div
                 key={index}
-                className="flex px-4 py-2 my-2 bg-secondary bg-opacity-30 rounded-lg"
+                className="flex px-4 py-2 my-2 bg-secondary bg-opacity-30 rounded-lg laptop:text-xl"
               >
                 <p>{item.name}</p>
               </div>
