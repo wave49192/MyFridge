@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import placeholderImage from "../../assets/food-placeholder.png";
 
 interface Recipe {
   recipe_id: string;
@@ -27,11 +28,45 @@ const RecipeList: React.FC<RecipeListProps> = ({
   isShowOneRecipeCols,
   screenHeight = 0,
 }) => {
+  const renderPlaceholderCard = () => (
+    <div
+      className={`grid gap-4 ${
+        isShowOneRecipeCols
+          ? "grid-cols-1 overflow-y-auto hide-scrollbar"
+          : "laptop:grid-cols-2 desktop:grid-cols-3"
+      }`}
+    >
+      <div className="card card-side bg-base-100 h-48 desktop:h-72">
+        <figure>
+          <img
+            src={placeholderImage}
+            alt="Loading..."
+            className="rounded-2xl mobile:w-32 mobile:h-48 laptop:w-48 laptop:h-48 desktop:h-72"
+          />
+        </figure>
+        <div className="pl-3 w-[239px] laptop:w-[300px] flex-col justify-end">
+          <div>
+            <h2 className="text-xl font-bold text-secondary-green text-ellipsis overflow-hidden line-clamp-2">
+              Loading...
+            </h2>
+            <div className="badge badge-primary text-white">Loading...</div>
+            <div className="flex-1">
+              <p className="text-ellipsis overflow-hidden line-clamp-4 desktop:line-clamp-8">
+                Loading...
+              </p>
+            </div>
+          </div>
+          <p className="flex-end text-xs text-end items-end">
+            Cooking Time: <span className="text-primary">Loading...</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
   if (loading) {
     return (
-      <div className="m-2 flex justify-center">
-        <div className="card card-side bg-base-100 h-48 w-80">loading..</div>
-      </div>
+      <div className="m-2 flex justify-center">{renderPlaceholderCard()}</div>
     );
   }
 
