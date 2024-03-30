@@ -66,7 +66,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
                   {recipe.cuisine_type}
                 </div>
                 <div className="flex-1">
-                  <p className="text-ellipsis overflow-hidden line-clamp-4">
+                  <p className="text-ellipsis overflow-hidden line-clamp-4 desktop:line-clamp-8">
                     "{recipe.title}" is a delightful dish that combines a
                     symphony of flavors and textures to create a culinary
                     masterpiece. This recipe features succulent ingredients

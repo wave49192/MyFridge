@@ -13,7 +13,12 @@ module.exports = {
       hd: "1440px",
     },
 
-    extend: {},
+    extend: {
+      lineClamp: {
+        7: "7",
+        8: "8",
+      },
+    },
     colors: {
       primary: "#EE7214",
       "primary-content": "#F7B787",
