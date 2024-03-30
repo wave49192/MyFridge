@@ -11,6 +11,7 @@ interface Recipe {
   ingredients: string[];
   cuisine_type: string;
 }
+
 interface RecipeListProps {
   loading: boolean;
   recipes: Recipe[];
@@ -22,6 +23,15 @@ const RecipeList: React.FC<RecipeListProps> = ({
   recipes,
   placeholderImage,
 }) => {
+  // Function to shuffle array elements
+  const shuffleArray = (array: any[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
   if (loading) {
     return (
       <div className="m-2 flex justify-center">
@@ -54,9 +64,12 @@ const RecipeList: React.FC<RecipeListProps> = ({
     );
   }
 
+  // Shuffle recipes array
+  const shuffledRecipes = shuffleArray([...recipes]);
+
   return (
     <div className="pb-4">
-      {recipes.map((recipe) => (
+      {shuffledRecipes.map((recipe) => (
         <Link to={`/recipe/${recipe.recipe_id}`} key={recipe.recipe_id}>
           <div className="card card-side bg-base-100 m-2 h-48">
             <figure>
