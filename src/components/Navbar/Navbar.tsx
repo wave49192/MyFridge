@@ -11,7 +11,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
       <div className="self-center rounded-full backdrop-blur-xl bg-white/30 p-3">
         <Link
           to="/"
-          className={`btn btn-ghost text-m rounded-full laptop:mx-3 ${
+          className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
             isAtPage === "Home" ? "bg-primary text-white hover:bg-primary" : ""
           }`}
         >
@@ -19,7 +19,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
         </Link>
         <Link
           to="/dashboard"
-          className={`btn btn-ghost text-m rounded-full laptop:mx-3 ${
+          className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
             isAtPage === "Dashboard"
               ? "bg-primary text-white hover:bg-primary"
               : ""
@@ -29,7 +29,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
         </Link>
         <Link
           to="/inventory"
-          className={`btn btn-ghost text-m rounded-full laptop:mx-3 ${
+          className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
             isAtPage === "Inventory"
               ? "bg-primary text-white hover:bg-primary"
               : ""
@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
         </Link>
         <Link
           to="/recipes"
-          className={`btn btn-ghost text-m rounded-full laptop:mx-3 ${
+          className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
             isAtPage === "Recipes"
               ? "bg-primary text-white hover:bg-primary"
               : ""
