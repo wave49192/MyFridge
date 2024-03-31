@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import DashboardPage from "./pages/Dashboard/DashboardPage.tsx";
@@ -8,52 +8,19 @@ import HomePage from "./pages/Home/HomePage.tsx";
 import InventoryPage from "./pages/Inventory/InventoryPage.tsx";
 import RecipeDetailsPage from "./pages/Recipes/RecipeDetailsPage.tsx";
 
-ReactDOM.render(
+document.documentElement.setAttribute("data-theme", "emmy");
+const container = document.getElementById("root");
+const root = createRoot(container!);
+root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <html data-theme="emmy">
-              <HomePage />
-            </html>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <html data-theme="emmy">
-              <DashboardPage />
-            </html>
-          }
-        />
-        <Route
-          path="/recipes"
-          element={
-            <html data-theme="emmy">
-              <RecipesPage />
-            </html>
-          }
-        />
-        <Route
-          path="/inventory"
-          element={
-            <html data-theme="emmy">
-              <InventoryPage />
-            </html>
-          }
-        />
-        <Route
-          path="/recipe/:recipeId"
-          element={
-            <html data-theme="emmy">
-              <RecipeDetailsPage />
-            </html>
-          }
-        />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/recipes" element={<RecipesPage />} />
+        <Route path="/inventory" element={<InventoryPage />} />
+        <Route path="/recipe/:recipeId" element={<RecipeDetailsPage />} />
       </Routes>
     </Router>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
