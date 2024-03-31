@@ -1,0 +1,3 @@
+interface Detection {
+    detections: string[]
+}
