@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Navbar, RecommendedRecipe } from "../../components";
@@ -19,6 +19,8 @@ const RecipeDetailsPage: React.FC = () => {
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [isLaptopScreen, setIsLaptopScreen] = useState<boolean>(false);
   const [isHDScreen, setIsHDScreen] = useState<boolean>(false);
+  const leftComponentRef = useRef<HTMLDivElement>(null);
+  const [leftComponentHeight, setLeftComponentHeight] = useState<number>(0);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -36,11 +38,24 @@ const RecipeDetailsPage: React.FC = () => {
   }, [recipeId]);
 
   useEffect(() => {
+    if (leftComponentRef.current) {
+      const leftComponentHeight = leftComponentRef.current.clientHeight;
+      setLeftComponentHeight(leftComponentHeight);
+    }
+  }, [leftComponentRef]);
+
+  useEffect(() => {
     const handleResize = () => {
       const laptopMediaQuery = window.matchMedia("(min-width: 427px)");
       const hdMediaQuery = window.matchMedia("(min-width: 1440px)");
       setIsLaptopScreen(laptopMediaQuery.matches);
       setIsHDScreen(hdMediaQuery.matches);
+      if (leftComponentRef.current) {
+        const leftComponentHeight = leftComponentRef.current.clientHeight;
+        // Now you have the height of the left component
+        setLeftComponentHeight(leftComponentHeight);
+        console.log("Left Component Height:", leftComponentHeight);
+      }
     };
 
     handleResize(); // Check on initial render
@@ -48,7 +63,7 @@ const RecipeDetailsPage: React.FC = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [recipe, isLaptopScreen, isHDScreen]);
 
   if (!recipe) {
     return <div>Loading...</div>;
@@ -61,7 +76,10 @@ const RecipeDetailsPage: React.FC = () => {
       <Navbar isAtPage="Recipes" />
 
       <div className="hd:flex hd:mx-40">
-        <div className="flex flex-col min-h-screen justify-between bg-white text-accent flex-1 hd:flex-3">
+        <div
+          ref={leftComponentRef}
+          className="flex flex-col min-h-screen justify-between bg-white text-accent flex-1 hd:flex-3"
+        >
           <div className="flex-grow">
             <img
               src={recipe.image_url}
@@ -144,7 +162,7 @@ const RecipeDetailsPage: React.FC = () => {
           <div className="hd:ml-4">
             <RecommendedRecipe
               isInRecipeDetailsPage={true}
-              screenHeight={1494}
+              screenHeight={leftComponentHeight} // Pass dynamic screen height
             />
           </div>
         )}
