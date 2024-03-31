@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "../../components";
 import TryFeature from "../../components/TryFeature/TryFeature";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Pagination from "../../components/Pagination/Pagination";
+import axios from "axios";
+
+interface Ingredient {
+  name: string
+}
 
 const InventoryPage: React.FC = () => {
-  const [ingredients, setIngredients] = useState([
-    "Onion",
-    "Tomato",
-    "Tomato",
-    "Tomato",
-    "Tomato",
-  ]);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
+
+  useEffect(() => {
+    axios.get<Ingredient[]>('http://localhost:8000/ingredients').then(res => setIngredients(res.data))
+  }, [])
   
   return (
     <div className="flex flex-col items-center text-2xl gap-4">
@@ -33,7 +36,7 @@ const InventoryPage: React.FC = () => {
               key={i}
               className="flex px-4 py-3 my-2 bg-primary-2 bg-opacity-25 rounded-2xl laptop:text-xl"
             >
-              <p className="text-base font-bold text-secondary">{v}</p>
+              <p className="text-base font-bold text-secondary">{v.name}</p>
             </div>
           ))}
         </div>

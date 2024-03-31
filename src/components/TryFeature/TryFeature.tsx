@@ -1,4 +1,4 @@
-import React from 'react'
+import { Link } from "react-router-dom"
 
 const TryFeature = () => {
   return (
@@ -7,7 +7,9 @@ const TryFeature = () => {
             <p className='text-base'>Try our new feature</p>
             <h2 className='text-xl font-bold'>AI Detecting Ingredients!</h2>
         </div>
-        <button className="btn bg-primary btn-sm w-fit text-base-100">Try now</button>
+        <Link to={"/inventory/detect"}>
+          <button className="btn bg-primary btn-sm w-fit text-base-100">Try now</button>
+        </Link>
     </div>
   )
 }

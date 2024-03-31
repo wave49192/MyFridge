@@ -11,9 +11,9 @@ const LinkWithHighlightAtLocation: React.FC<{
   currentLocation: Location;
 }> = ({ location, pathName, currentLocation }) => (
   <Link
-    to={location}
+    to={'/' + location}
     className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
-      currentLocation.pathname === location
+      currentLocation.pathname.split("/")[1] === location
         ? "bg-primary text-white hover:bg-primary"
         : ""
     }`}
@@ -22,27 +22,27 @@ const LinkWithHighlightAtLocation: React.FC<{
   </Link>
 );
 
-const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
+const Navbar: React.FC<NavbarNavigation> = () => {
   const location = useLocation();
 
   return (
     <div className="navbar sticky top-0 z-50 justify-center">
       <div className="self-center rounded-full backdrop-blur-xl bg-white/30 p-3">
         <LinkWithHighlightAtLocation
-          location={"/"}
+          location={""}
           currentLocation={location} pathName={"Home"}        
           />
         
         <LinkWithHighlightAtLocation
-          location={"/dashboard"}
+          location={"dashboard"}
           currentLocation={location} pathName={"Dashboard"}        
           />
         <LinkWithHighlightAtLocation
-          location={"/inventory"}
+          location={"inventory"}
           currentLocation={location} pathName={"Inventory"}        
           />
         <LinkWithHighlightAtLocation
-          location={"/recipes"}
+          location={"recipes"}
           currentLocation={location} pathName={"Recipes"}        
           />
         <div className="dropdown dropdown-end">
