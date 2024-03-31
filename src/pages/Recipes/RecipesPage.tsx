@@ -20,8 +20,16 @@ const RecipesPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
-    // Fetch all recipes when component mounts
-    fetchRecipes();
+    // Check if recipes exist in local storage
+    const storedRecipes = localStorage.getItem("recipes");
+    if (storedRecipes) {
+      const parsedRecipes = JSON.parse(storedRecipes);
+      const slicedRecipes = parsedRecipes.slice(0, 20); // Slice only the first 20 recipes
+      setSearchResults(slicedRecipes);
+      setIsLoading(false);
+    } else {
+      fetchRecipes(); // Fetch data from API if not found in local storage
+    }
   }, []);
 
   const fetchRecipes = async () => {
@@ -63,7 +71,7 @@ const RecipesPage: React.FC = () => {
 
   return (
     <>
-      <div className="px-5">
+      <div className="px-5 laptop:mx-20 hd:mx-60">
         <h1 className="text-center text-3xl font-bold mb-6">Explore Recipes</h1>
         <div className="relative mb-5">
           <input

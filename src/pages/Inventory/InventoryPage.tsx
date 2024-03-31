@@ -6,18 +6,20 @@ import Pagination from "../../components/Pagination/Pagination";
 import axios from "axios";
 
 interface Ingredient {
-  name: string
+  name: string;
 }
 
 const InventoryPage: React.FC = () => {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
 
   useEffect(() => {
-    axios.get<Ingredient[]>('http://localhost:8000/ingredients').then(res => setIngredients(res.data))
-  }, [])
-  
+    axios
+      .get<Ingredient[]>("http://localhost:8000/ingredients")
+      .then((res) => setIngredients(res.data));
+  }, []);
+
   return (
-    <div className="flex flex-col items-center text-2xl gap-4">
+    <div className="flex flex-col items-center text-2xl gap-4 laptop:mx-20 hd:mx-60">
       <h2 className="text-accent font-bold">Inventory</h2>
       <div className="flex flex-col gap-4 w-10/12">
         <TryFeature />
