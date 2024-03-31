@@ -63,7 +63,6 @@ const RecipesPage: React.FC = () => {
 
   return (
     <>
-      <Navbar isAtPage="Recipes" />
       <div className="px-5">
         <h1 className="text-center text-3xl font-bold mb-6">Explore Recipes</h1>
         <div className="relative mb-5">

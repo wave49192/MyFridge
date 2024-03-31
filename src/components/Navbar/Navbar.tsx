@@ -1,53 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Location, useLocation } from "react-router-dom";
 
 interface NavbarNavigation {
   isAtPage?: string;
 }
 
+const LinkWithHighlightAtLocation: React.FC<{
+  location: string;
+  pathName: string;
+  currentLocation: Location;
+}> = ({ location, pathName, currentLocation }) => (
+  <Link
+    to={location}
+    className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
+      currentLocation.pathname === location
+        ? "bg-primary text-white hover:bg-primary"
+        : ""
+    }`}
+  >
+    {pathName}
+  </Link>
+);
+
 const Navbar: React.FC<NavbarNavigation> = ({ isAtPage }) => {
+  const location = useLocation();
+
   return (
     <div className="navbar sticky top-0 z-50 justify-center">
       <div className="self-center rounded-full backdrop-blur-xl bg-white/30 p-3">
-        <Link
-          to="/"
-          className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
-            isAtPage === "Home" ? "bg-primary text-white hover:bg-primary" : ""
-          }`}
-        >
-          Home
-        </Link>
-        <Link
-          to="/dashboard"
-          className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
-            isAtPage === "Dashboard"
-              ? "bg-primary text-white hover:bg-primary"
-              : ""
-          }`}
-        >
-          Dashboard
-        </Link>
-        <Link
-          to="/inventory"
-          className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
-            isAtPage === "Inventory"
-              ? "bg-primary text-white hover:bg-primary"
-              : ""
-          }`}
-        >
-          Inventory
-        </Link>
-        <Link
-          to="/recipes"
-          className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
-            isAtPage === "Recipes"
-              ? "bg-primary text-white hover:bg-primary"
-              : ""
-          }`}
-        >
-          Recipes
-        </Link>
-
+        <LinkWithHighlightAtLocation
+          location={"/"}
+          currentLocation={location} pathName={"Home"}        
+          />
+        
+        <LinkWithHighlightAtLocation
+          location={"/dashboard"}
+          currentLocation={location} pathName={"Dashboard"}        
+          />
+        <LinkWithHighlightAtLocation
+          location={"/inventory"}
+          currentLocation={location} pathName={"Inventory"}        
+          />
+        <LinkWithHighlightAtLocation
+          location={"/recipes"}
+          currentLocation={location} pathName={"Recipes"}        
+          />
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}

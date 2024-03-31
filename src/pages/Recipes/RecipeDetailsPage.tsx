@@ -73,8 +73,6 @@ const RecipeDetailsPage: React.FC = () => {
 
   return (
     <>
-      <Navbar isAtPage="Recipes" />
-
       <div className="hd:flex hd:mx-40">
         <div
           ref={leftComponentRef}
