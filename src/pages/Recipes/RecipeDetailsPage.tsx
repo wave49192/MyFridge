@@ -50,17 +50,6 @@ const RecipeDetailsPage: React.FC = () => {
       const hdMediaQuery = window.matchMedia("(min-width: 1440px)");
       setIsLaptopScreen(laptopMediaQuery.matches);
       setIsHDScreen(hdMediaQuery.matches);
-    };
-
-    handleResize(); // Check on initial render
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
       if (leftComponentRef.current) {
         const leftComponentHeight = leftComponentRef.current.clientHeight;
         // Now you have the height of the left component
