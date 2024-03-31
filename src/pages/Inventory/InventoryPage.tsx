@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Navbar } from "../../components";
 import TryFeature from "../../components/TryFeature/TryFeature";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Pagination from "../../components/Pagination/Pagination";

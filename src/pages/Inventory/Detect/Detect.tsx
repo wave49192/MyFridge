@@ -32,10 +32,8 @@ const DetectPage = () => {
     formData.append("image", acceptedFiles[0]);
 
     await axios.post("http://localhost:8000/detect/", formData).then((r) => {
-      setTimeout(() => {
-        setDetected(r.data);
-        setIsDetecting(false);
-      }, 2000);
+      setDetected(r.data);
+      setIsDetecting(false);
     });
   }
 

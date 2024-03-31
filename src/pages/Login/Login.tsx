@@ -20,7 +20,7 @@ const Login = () => {
     const params = new URLSearchParams({
       response_type: "code",
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      redirect_uri: `${import.meta.env.VITE_BACKEND_API_URL}`,
+      redirect_uri: `${import.meta.env.VITE_BACKEND_API_URL}/google`,
       prompt: "select_account",
       access_type: "offline",
       scope
