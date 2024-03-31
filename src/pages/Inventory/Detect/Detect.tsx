@@ -40,7 +40,7 @@ const DetectPage = () => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-4 laptop:mx-20 hd:mx-60">
       <h1 className="text-3xl text-accent">Add Ingredient</h1>
       <div className="flex gap-4">
         <a className="text-primary">Add manually</a>
