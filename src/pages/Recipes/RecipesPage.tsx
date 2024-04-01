@@ -36,6 +36,8 @@ const RecipesPage: React.FC = () => {
     try {
       setIsLoading(true);
       const response = await axios.get("http://127.0.0.1:8000/recipes/");
+      localStorage.setItem("recipes", JSON.stringify(response.data));
+
       setSearchResults(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -51,10 +53,21 @@ const RecipesPage: React.FC = () => {
         // If search query is empty, fetch all recipes
         await fetchRecipes();
       } else {
-        const response = await axios.get(
-          `http://127.0.0.1:8000/recipes/search/?name=${searchQuery}`
-        );
-        setSearchResults(response.data);
+        const storedRecipes = localStorage.getItem("recipes");
+        if (storedRecipes) {
+          // If recipes exist in local storage, filter them by title
+          const parsedRecipes = JSON.parse(storedRecipes);
+          const filteredRecipes = parsedRecipes.filter((recipe: Recipe) =>
+            recipe.title.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          setSearchResults(filteredRecipes);
+        } else {
+          // If recipes don't exist in local storage, fetch from the API
+          const response = await axios.get(
+            `http://127.0.0.1:8000/recipes/search/?name=${searchQuery}`
+          );
+          setSearchResults(response.data);
+        }
       }
       setIsLoading(false);
     } catch (error) {
