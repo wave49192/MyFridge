@@ -154,9 +154,8 @@ const RecipeList: React.FC<RecipeListProps> = ({
           </Link>
         ))}
       </div>
-      // Pagination
       {!isShowOneRecipeCols && (
-        <div className="join mt-10 flex justify-end">
+        <div className="join mt-10 flex justify-end mb-8 mobile:justify-center">
           {currentPage > 1 && (
             <>
               <button
@@ -165,13 +164,6 @@ const RecipeList: React.FC<RecipeListProps> = ({
                 style={{ width: "40px", height: "40px" }}
               >
                 {"<<"}
-              </button>
-              <button
-                onClick={() => paginate(currentPage - 1)}
-                className={`join-item btn btn-primary text-white`}
-                style={{ width: "40px", height: "40px" }}
-              >
-                {"<"}
               </button>
             </>
           )}
@@ -210,13 +202,6 @@ const RecipeList: React.FC<RecipeListProps> = ({
           })}
           {currentPage < Math.ceil(recipes.length / recipesPerPage) && (
             <>
-              <button
-                onClick={() => paginate(currentPage + 1)}
-                className={`join-item btn btn-primary text-white`}
-                style={{ width: "40px", height: "40px" }}
-              >
-                {">"}
-              </button>
               <button
                 onClick={() =>
                   paginate(Math.ceil(recipes.length / recipesPerPage))
