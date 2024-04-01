@@ -32,16 +32,11 @@ const RecipeList: React.FC<RecipeListProps> = ({
   shuffleRecipe,
 }) => {
   const shuffleRecipes = (recipes: Recipe[]): Recipe[] => {
-    const shuffledRecipes = [...recipes]; // Create a copy of the recipes array
-    for (let i = shuffledRecipes.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledRecipes[i], shuffledRecipes[j]] = [
-        shuffledRecipes[j],
-        shuffledRecipes[i],
-      ]; // Swap elements
-    }
-    return shuffledRecipes;
+    return recipes.slice().sort(() => Math.random() - 0.5);
   };
+
+  // Shuffle recipes if shuffleRecipe is true
+  const shuffledRecipes = shuffleRecipe ? shuffleRecipes(recipes) : recipes;
 
   const renderPlaceholderCard = () => (
     <div
@@ -84,9 +79,6 @@ const RecipeList: React.FC<RecipeListProps> = ({
       <div className="m-2 flex justify-center">{renderPlaceholderCard()}</div>
     );
   }
-
-  // Shuffle recipes if shuffleRecipe is true
-  const shuffledRecipes = shuffleRecipe ? shuffleRecipes(recipes) : recipes;
 
   return (
     <div
