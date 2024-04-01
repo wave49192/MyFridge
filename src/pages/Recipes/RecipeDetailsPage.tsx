@@ -12,10 +12,12 @@ interface Recipe {
   cooking_time: number;
   ingredients: string;
   cuisine_type: string;
+  cleaned_ingredients: string;
 }
 
 const RecipeDetailsPage: React.FC = () => {
   const { recipeId } = useParams<{ recipeId: string }>();
+  const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]);
   const [recipe, setRecipe] = useState<Recipe | null>(null);
   const [isLaptopScreen, setIsLaptopScreen] = useState<boolean>(false);
   const [isHDScreen, setIsHDScreen] = useState<boolean>(false);
@@ -64,6 +66,31 @@ const RecipeDetailsPage: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [recipe, isLaptopScreen, isHDScreen]);
+
+  useEffect(() => {
+    const fetchRecommendedRecipes = async () => {
+      try {
+        const response = await axios.post<Recipe[]>(
+          `http://127.0.0.1:8000/recommend-recipe/`,
+          {
+            recipes: [
+              {
+                recipe_id: recipe?.recipe_id,
+                cleaned_ingredients: recipe?.cleaned_ingredients,
+              },
+            ],
+          }
+        );
+        setRecommendedRecipes(response.data);
+      } catch (error) {
+        console.error("Error fetching recommended recipes:", error);
+      }
+    };
+
+    if (recipe) {
+      fetchRecommendedRecipes();
+    }
+  }, [recipe]);
 
   if (!recipe) {
     return <div>Loading...</div>;
@@ -161,6 +188,7 @@ const RecipeDetailsPage: React.FC = () => {
             <RecommendedRecipe
               isInRecipeDetailsPage={true}
               screenHeight={leftComponentHeight} // Pass dynamic screen height
+              recommendedRecipes={recommendedRecipes}
             />
           </div>
         )}

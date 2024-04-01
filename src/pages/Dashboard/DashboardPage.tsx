@@ -9,7 +9,10 @@ const DashboardPage: React.FC = () => {
         Dashboard
       </h1>
       <FridgeOverview />
-      <RecommendedRecipe isInRecipeDetailsPage={false} />
+      <RecommendedRecipe
+        isInRecipeDetailsPage={false}
+        recommendedRecipes={[]}
+      />
     </div>
   );
 };

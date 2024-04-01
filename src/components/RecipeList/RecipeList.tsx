@@ -9,8 +9,9 @@ interface Recipe {
   publisher: string;
   source_url: string;
   cooking_time: number;
-  ingredients: string[];
+  ingredients: string;
   cuisine_type: string;
+  cleaned_ingredients: string;
 }
 
 interface RecipeListProps {
