@@ -129,7 +129,7 @@ const RecipeDetailsPage: React.FC = () => {
                   {recipe.cuisine_type}
                 </div>
               </div>
-              <p className="text-md mb-2 font-semibold laptop:text-xl mb-">
+              <p className="text-md mb-2 font-semibold laptop:text-xl mb-10">
                 Cooking Time:{" "}
                 <span className="text-md text-primary">
                   {recipe.cooking_time} mins
@@ -203,7 +203,7 @@ const RecipeDetailsPage: React.FC = () => {
             screenHeight={leftComponentHeight} // Pass dynamic screen height
             recommendedRecipes={recommendedRecipes}
             shuffleRecipe={true}
-            recipesPerPage={24}
+            recipesPerPage={6}
           />
         </div>
       )}
