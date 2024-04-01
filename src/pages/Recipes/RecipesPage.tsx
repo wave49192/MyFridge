@@ -14,6 +14,7 @@ interface Recipe {
   cuisine_type: string;
   cleaned_ingredients: string;
 }
+
 const RecipesPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<Recipe[]>([]);
@@ -24,7 +25,13 @@ const RecipesPage: React.FC = () => {
     const storedRecipes = localStorage.getItem("recipes");
     if (storedRecipes) {
       const parsedRecipes = JSON.parse(storedRecipes);
-      const slicedRecipes = parsedRecipes.slice(0, 20); // Slice only the first 20 recipes
+
+      // Shuffle the parsed recipes
+      const shuffledRecipes = parsedRecipes.sort(() => Math.random() - 0.5);
+
+      // Slice the first 21 recipes
+      const slicedRecipes = shuffledRecipes.slice(0, 21);
+
       setSearchResults(slicedRecipes);
       setIsLoading(false);
     } else {
@@ -110,6 +117,7 @@ const RecipesPage: React.FC = () => {
             recipes={searchResults}
             placeholderImage={placeholderImage}
             isShowOneRecipeCols={false}
+            shuffleRecipe={false}
           />
         </div>
       </div>

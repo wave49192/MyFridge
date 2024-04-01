@@ -20,6 +20,7 @@ interface RecipeListProps {
   placeholderImage: string;
   isShowOneRecipeCols: boolean;
   screenHeight?: number;
+  shuffleRecipe: boolean;
 }
 
 const RecipeList: React.FC<RecipeListProps> = ({
@@ -28,7 +29,20 @@ const RecipeList: React.FC<RecipeListProps> = ({
   placeholderImage,
   isShowOneRecipeCols,
   screenHeight = 0,
+  shuffleRecipe,
 }) => {
+  const shuffleRecipes = (recipes: Recipe[]): Recipe[] => {
+    const shuffledRecipes = [...recipes]; // Create a copy of the recipes array
+    for (let i = shuffledRecipes.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledRecipes[i], shuffledRecipes[j]] = [
+        shuffledRecipes[j],
+        shuffledRecipes[i],
+      ]; // Swap elements
+    }
+    return shuffledRecipes;
+  };
+
   const renderPlaceholderCard = () => (
     <div
       className={`grid gap-4 ${
@@ -71,6 +85,9 @@ const RecipeList: React.FC<RecipeListProps> = ({
     );
   }
 
+  // Shuffle recipes if shuffleRecipe is true
+  const shuffledRecipes = shuffleRecipe ? shuffleRecipes(recipes) : recipes;
+
   return (
     <div
       className={`grid gap-4 ${
@@ -82,7 +99,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
         maxHeight: isShowOneRecipeCols ? `${screenHeight - 100}px` : "none",
       }}
     >
-      {recipes.map((recipe) => (
+      {shuffledRecipes.map((recipe) => (
         <Link to={`/recipe/${recipe.recipe_id}`} key={recipe.recipe_id}>
           <div className="card card-side bg-base-100 h-48 desktop:h-72">
             <figure>
