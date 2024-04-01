@@ -118,7 +118,7 @@ const RecipesPage: React.FC = () => {
             placeholderImage={placeholderImage}
             isShowOneRecipeCols={false}
             shuffleRecipe={false}
-            recipesPerPage={18}
+            recipesPerPage={12}
           />
         </div>
       </div>

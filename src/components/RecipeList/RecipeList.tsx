@@ -46,9 +46,9 @@ const RecipeList: React.FC<RecipeListProps> = ({
   };
 
   // Shuffle recipes if shuffleRecipe is true
-  const shuffledRecipes = shuffleRecipe
+  const renderedRecipe = shuffleRecipe
     ? shuffleRecipes(currentRecipes)
-    : recipes;
+    : currentRecipes;
 
   const renderPlaceholderCard = () => (
     <div
@@ -105,7 +105,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
           maxHeight: isShowOneRecipeCols ? `${screenHeight}px` : "none",
         }}
       >
-        {currentRecipes.map((recipe) => (
+        {renderedRecipe.map((recipe) => (
           <Link to={`/recipe/${recipe.recipe_id}`} key={recipe.recipe_id}>
             <div className="card card-side bg-base-100 h-48 desktop:h-72">
               <figure>
@@ -154,22 +154,80 @@ const RecipeList: React.FC<RecipeListProps> = ({
           </Link>
         ))}
       </div>
-      {/* Pagination */}
+      // Pagination
       {!isShowOneRecipeCols && (
         <div className="join mt-10 flex justify-end">
+          {currentPage > 1 && (
+            <>
+              <button
+                onClick={() => paginate(1)}
+                className={`join-item btn btn-primary text-white`}
+                style={{ width: "40px", height: "40px" }}
+              >
+                {"<<"}
+              </button>
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                className={`join-item btn btn-primary text-white`}
+                style={{ width: "40px", height: "40px" }}
+              >
+                {"<"}
+              </button>
+            </>
+          )}
           {Array.from({
-            length: Math.ceil(recipes.length / recipesPerPage),
-          }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => paginate(index + 1)}
-              className={`join-item btn btn-primary text-white ${
-                currentPage === index + 1 ? "btn-active" : ""
-              }`}
-            >
-              {index + 1}
-            </button>
-          ))}
+            length: Math.min(Math.ceil(recipes.length / recipesPerPage), 7),
+          }).map((_, index) => {
+            let page: number;
+            if (
+              currentPage <= 4 ||
+              Math.ceil(recipes.length / recipesPerPage) <= 7
+            ) {
+              page = index + 1;
+            } else if (
+              currentPage >=
+              Math.ceil(recipes.length / recipesPerPage) - 3
+            ) {
+              page = Math.ceil(recipes.length / recipesPerPage) - 7 + index + 1;
+            } else {
+              page = currentPage - 3 + index;
+            }
+            return (
+              page >= 1 &&
+              page <= Math.ceil(recipes.length / recipesPerPage) && (
+                <button
+                  key={index}
+                  onClick={() => paginate(page)}
+                  className={`join-item btn btn-primary text-white ${
+                    currentPage === page ? "btn-active" : ""
+                  }`}
+                  style={{ width: "40px", height: "40px" }}
+                >
+                  {page}
+                </button>
+              )
+            );
+          })}
+          {currentPage < Math.ceil(recipes.length / recipesPerPage) && (
+            <>
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                className={`join-item btn btn-primary text-white`}
+                style={{ width: "40px", height: "40px" }}
+              >
+                {">"}
+              </button>
+              <button
+                onClick={() =>
+                  paginate(Math.ceil(recipes.length / recipesPerPage))
+                }
+                className={`join-item btn btn-primary text-white`}
+                style={{ width: "40px", height: "40px" }}
+              >
+                {">>"}
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>
