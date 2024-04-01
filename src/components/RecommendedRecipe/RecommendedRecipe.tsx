@@ -42,7 +42,7 @@ const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
 
   return (
     <div className={`${isInRecipeDetailsPage ? "mx-6 hide-scrollbar" : "m-6"}`}>
-      <h1 className="text-accent font-bold mobile:text-xl laptop:text-3xl laptop:mb-8">
+      <h1 className="text-accent font-bold mobile:text-[27px] mobile:font-semibold laptop:text-3xl laptop:mb-8 mb-5">
         Recommended For you
       </h1>
       {/* Pass fetched recipes data as props to RecipeList */}

@@ -49,7 +49,7 @@ const DashboardPage: React.FC = () => {
         isInRecipeDetailsPage={false}
         recommendedRecipes={recommendedRecipes}
         shuffleRecipe={false}
-        recipesPerPage={12}
+        recipesPerPage={6}
       />
     </div>
   );

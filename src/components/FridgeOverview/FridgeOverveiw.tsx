@@ -53,10 +53,12 @@ const FridgeOverview: React.FC = () => {
   };
 
   return (
-    <div className="mx-5 bg-base-100 p-4 rounded-md shadow-md justify-center">
+    <div className="mx-5 bg-base-100 p-4 rounded-mdjustify-center">
       <div className="flex items-center mb-2 justify-between">
         <div className="flex">
-          <h1 className="text-2xl font-bold">Overview Fridge</h1>
+          <h1 className="mobile:text-[27px] text-4xl font-bold mobile:font-semibold hd:mb-6">
+            Overview Fridge
+          </h1>
           {/* <a href="" className="mt-2 ml-3">
             <p className="text-md underline">View All</p>
           </a> */}

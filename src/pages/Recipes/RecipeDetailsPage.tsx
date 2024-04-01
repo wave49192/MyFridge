@@ -129,7 +129,7 @@ const RecipeDetailsPage: React.FC = () => {
                   {recipe.cuisine_type}
                 </div>
               </div>
-              <p className="text-md mb-2 font-semibold laptop:text-xl">
+              <p className="text-md mb-2 font-semibold laptop:text-xl mb-">
                 Cooking Time:{" "}
                 <span className="text-md text-primary">
                   {recipe.cooking_time} mins
@@ -163,7 +163,7 @@ const RecipeDetailsPage: React.FC = () => {
               </div>
             </div>
           </div>
-          <footer className="p-8 bg-secondary text-white bg-opacity-85 hd:rounded-full hd:mb-10">
+          <footer className="p-8 bg-secondary text-white bg-opacity-85 hd:rounded">
             <div className="max-w-screen-md mx-auto">
               <h6 className="text-center text-white font-bold mb-3 ">
                 STEP TO COOK
