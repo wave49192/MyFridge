@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { Navbar, RecommendedRecipe } from "../../components";
+import { RecommendedRecipe } from "../../components";
 
 interface Recipe {
   recipe_id: string;

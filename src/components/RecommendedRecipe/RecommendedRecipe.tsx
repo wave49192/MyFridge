@@ -33,7 +33,7 @@ const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
     if (recommendedRecipes.length > 0) {
       setRecipes(recommendedRecipes);
       setLoading(false);
-    } else {
+    } else if (!isInRecipeDetailsPage) {
       fetchData(); // Fetch data from API if recommended recipes are not provided
     }
   }, [recommendedRecipes]);
