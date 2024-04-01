@@ -35,24 +35,8 @@ const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
     if (recommendedRecipes.length > 0) {
       setRecipes(recommendedRecipes);
       setLoading(false);
-    } else if (!isInRecipeDetailsPage) {
-      fetchData(); // Fetch data from API if recommended recipes are not provided
     }
   }, [recommendedRecipes]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("http://127.0.0.1:8000/recipes/");
-      const allRecipes = response.data;
-      const slicedRecipes = response.data.slice(0, 20); // Slice only the first 20 recipes
-      setRecipes(slicedRecipes);
-      setLoading(false);
-      // Store sliced recipes in local storage
-      localStorage.setItem("recipes", JSON.stringify(allRecipes));
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
 
   return (
     <div
