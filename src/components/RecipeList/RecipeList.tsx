@@ -94,7 +94,6 @@ const RecipeList: React.FC<RecipeListProps> = ({
 
   return (
     <div className="flex-col">
-      {/* Your existing recipe rendering code */}
       <div
         className={`grid gap-4 ${
           isShowOneRecipeCols
