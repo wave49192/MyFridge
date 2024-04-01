@@ -15,6 +15,9 @@ module.exports = {
     },
 
     extend: {
+      fontFamily: {
+        asap: ["Asap", "sans-serif"],
+      },
       lineClamp: {
         7: "7",
         8: "8",

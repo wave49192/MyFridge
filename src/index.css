@@ -26,3 +26,8 @@ code {
         display: none;
     }
 }
+
+body {
+    font-family: 'Asap', sans-serif;
+    /* Replace 'Asap' with your desired font */
+}
