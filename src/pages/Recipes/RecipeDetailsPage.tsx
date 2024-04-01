@@ -203,7 +203,7 @@ const RecipeDetailsPage: React.FC = () => {
             screenHeight={leftComponentHeight} // Pass dynamic screen height
             recommendedRecipes={recommendedRecipes}
             shuffleRecipe={true}
-            recipesPerPage={6}
+            recipesPerPage={2}
           />
         </div>
       )}
