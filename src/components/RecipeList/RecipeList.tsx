@@ -88,7 +88,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
           : "laptop:grid-cols-2 desktop:grid-cols-3"
       }`}
       style={{
-        maxHeight: isShowOneRecipeCols ? `${screenHeight - 100}px` : "none",
+        maxHeight: isShowOneRecipeCols ? `${screenHeight}px` : "none",
       }}
     >
       {shuffledRecipes.map((recipe) => (

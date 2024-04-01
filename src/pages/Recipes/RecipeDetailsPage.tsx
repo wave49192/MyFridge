@@ -194,6 +194,17 @@ const RecipeDetailsPage: React.FC = () => {
           </div>
         )}
       </div>
+
+      {!isHDScreen && (
+        <div className="hd:ml-4">
+          <RecommendedRecipe
+            isInRecipeDetailsPage={false}
+            screenHeight={leftComponentHeight} // Pass dynamic screen height
+            recommendedRecipes={recommendedRecipes}
+            shuffleRecipe={true}
+          />
+        </div>
+      )}
     </>
   );
 };

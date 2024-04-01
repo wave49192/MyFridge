@@ -39,10 +39,7 @@ const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
   }, [recommendedRecipes]);
 
   return (
-    <div
-      className={`${isInRecipeDetailsPage ? "mx-6 " : "m-6"}`}
-      style={{ overflowY: isInRecipeDetailsPage ? "scroll" : "visible" }}
-    >
+    <div className={`${isInRecipeDetailsPage ? "mx-6 hide-scrollbar" : "m-6"}`}>
       <h1 className="text-accent font-bold mobile:text-xl laptop:text-3xl laptop:mb-8">
         Recommended For you
       </h1>
