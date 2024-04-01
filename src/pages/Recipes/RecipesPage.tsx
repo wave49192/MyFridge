@@ -29,8 +29,8 @@ const RecipesPage: React.FC = () => {
       // Shuffle the parsed recipes
       const shuffledRecipes = parsedRecipes.sort(() => Math.random() - 0.5);
 
-      // Slice the first 21 recipes
-      const slicedRecipes = shuffledRecipes.slice(0, 21);
+      // Slice the first 24 recipes
+      const slicedRecipes = shuffledRecipes.slice(0, 24);
 
       setSearchResults(slicedRecipes);
       setIsLoading(false);
@@ -118,6 +118,7 @@ const RecipesPage: React.FC = () => {
             placeholderImage={placeholderImage}
             isShowOneRecipeCols={false}
             shuffleRecipe={false}
+            recipesPerPage={18}
           />
         </div>
       </div>

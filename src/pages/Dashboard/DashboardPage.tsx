@@ -48,7 +48,8 @@ const DashboardPage: React.FC = () => {
       <RecommendedRecipe
         isInRecipeDetailsPage={false}
         recommendedRecipes={recommendedRecipes}
-        shuffleRecipe={true}
+        shuffleRecipe={false}
+        recipesPerPage={12}
       />
     </div>
   );

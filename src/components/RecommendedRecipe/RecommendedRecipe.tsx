@@ -8,6 +8,7 @@ interface RecommendedRecipeInterface {
   screenHeight?: number; // New prop for screen height
   recommendedRecipes: Recipe[];
   shuffleRecipe: boolean;
+  recipesPerPage: number;
 }
 
 interface Recipe {
@@ -27,6 +28,7 @@ const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
   screenHeight, // Receive screen height as prop
   recommendedRecipes,
   shuffleRecipe,
+  recipesPerPage,
 }) => {
   const [loading, setLoading] = useState(true);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -51,6 +53,7 @@ const RecommendedRecipe: React.FC<RecommendedRecipeInterface> = ({
         isShowOneRecipeCols={isInRecipeDetailsPage}
         screenHeight={screenHeight} // Pass screen height to RecipeList
         shuffleRecipe={shuffleRecipe}
+        recipesPerPage={recipesPerPage}
       />
     </div>
   );

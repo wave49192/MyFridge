@@ -187,9 +187,10 @@ const RecipeDetailsPage: React.FC = () => {
           <div className="hd:ml-4">
             <RecommendedRecipe
               isInRecipeDetailsPage={true}
-              screenHeight={leftComponentHeight}
+              screenHeight={leftComponentHeight} // Pass dynamic screen height
               recommendedRecipes={recommendedRecipes}
               shuffleRecipe={true}
+              recipesPerPage={24}
             />
           </div>
         )}
@@ -199,9 +200,10 @@ const RecipeDetailsPage: React.FC = () => {
         <div className="hd:ml-4">
           <RecommendedRecipe
             isInRecipeDetailsPage={false}
-            screenHeight={leftComponentHeight}
+            screenHeight={leftComponentHeight} // Pass dynamic screen height
             recommendedRecipes={recommendedRecipes}
             shuffleRecipe={true}
+            recipesPerPage={24}
           />
         </div>
       )}
