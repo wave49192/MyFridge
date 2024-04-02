@@ -69,7 +69,7 @@ const DetectPage = () => {
           )}
         </div>
       </div>
-      {isStartDetecting && detected.detections.length === 0 ? (
+      {isStartDetecting && detected.detections.length === 0 && !isDetecting ? (
         <div>No ingredients detected</div>
       ) : (
         detected.detections.map((v, i) => (
