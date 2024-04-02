@@ -20,11 +20,12 @@ const DetectPage = () => {
   >(null);
   const [detected, setDetected] = useState<Detection>({ detections: [] });
   const [isDetecting, setIsDetecting] = useState<boolean>(false);
+  const [isStartDetecting, setIsStartDetecting] = useState<boolean>(false);
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     setIsDetecting(true);
-
+    setIsStartDetecting(true);
     if (typeof acceptedFiles[0] === "undefined") return;
 
     const formData = new FormData();
@@ -68,7 +69,9 @@ const DetectPage = () => {
           )}
         </div>
       </div>
-      {detected.detections.length !== 0 ? (
+      {isStartDetecting && detected.detections.length === 0 ? (
+        <div>No ingredients detected</div>
+      ) : (
         detected.detections.map((v, i) => (
           <div
             key={i}
@@ -77,9 +80,8 @@ const DetectPage = () => {
             <p className="text-base font-bold text-secondary">{v}</p>
           </div>
         ))
-      ) : (
-        <></>
       )}
+
       <div className="h-12 w-10/12 m-4 flex sticky bottom-5">
         <div className="w-1/3 bg-gradient-to-r from-[#DB2DEE] via-[#E23CBF] to-[#E94B8F] rounded-l-[20px]">
           <p className="invisible">1</p>
