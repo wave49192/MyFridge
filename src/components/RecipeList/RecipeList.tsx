@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import placeholderImage from "../../assets/food-placeholder.png";
 
 interface Recipe {
   recipe_id: string;

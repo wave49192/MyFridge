@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Navbar, RecipeList } from "../../components";
+import { RecipeList } from "../../components";
 import placeholderImage from "../../assets/food-placeholder.png";
 
 interface Recipe {

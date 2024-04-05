@@ -20,15 +20,13 @@ const Login = () => {
     const params = new URLSearchParams({
       response_type: "code",
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      redirect_uri: `${import.meta.env.VITE_BACKEND_API_URL}/google`,
+      redirect_uri: import.meta.env.VITE_GOOGLE_REDIRECT_URL_ENDPOINT,
       prompt: "select_account",
       access_type: "offline",
       scope
     });
 
     const url = `${googleAuthUrl}?${params}`;
-
-    console.log(params)
 
     window.location.href = url;
   }, []);

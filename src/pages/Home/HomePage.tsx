@@ -1,12 +1,10 @@
 import React from "react";
-
-import { Navbar, RecipeList } from "../../components";
+import { useAuth } from "../../context/AuthContext";
 
 const HomePage: React.FC = () => {
-  return (
-    <div>
-    </div>
-  );
+  const { user, isAuthenticated } = useAuth()
+
+  return <div>{isAuthenticated ? user?.name : 'no'}</div>;
 };
 
 export default HomePage;

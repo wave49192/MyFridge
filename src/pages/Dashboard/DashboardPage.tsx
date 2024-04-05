@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navbar, RecommendedRecipe } from "../../components";
+import { RecommendedRecipe } from "../../components";
 import FridgeOverview from "../../components/FridgeOverview/FridgeOverveiw";
 import axios from "axios";
 interface Recipe {

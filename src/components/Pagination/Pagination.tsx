@@ -1,5 +1,3 @@
-import React from "react";
-
 const Pagination = () => {
   return (
     <div className="join gap-[3px] self-end mr-8">
