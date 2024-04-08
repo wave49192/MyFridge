@@ -26,9 +26,14 @@ const LinkWithHighlightAtLocation: React.FC<{
 );
 
 const Navbar: React.FC<NavbarNavigation> = () => {
-  const { isAuthenticated, user, storeUserToSession, getUserFromSession, clearUserFromSession } =
-    useAuth();
-  const navigate = useNavigate()
+  const {
+    isAuthenticated,
+    user,
+    storeUserToSession,
+    getUserFromSession,
+    clearUserFromSession,
+  } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -47,7 +52,7 @@ const Navbar: React.FC<NavbarNavigation> = () => {
               },
               res.data.access_token
             );
-            navigate("/")
+            navigate("/");
             window.location.reload();
           })
           .catch((err) => {

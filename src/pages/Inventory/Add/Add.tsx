@@ -78,7 +78,7 @@ const AddPage = () => {
               </div>
               <span className="cols-span-1">Amount</span>
               <input
-                className="col-span-3 rounded-[20px] p-2"
+                className="col-span-3 rounded-[20px] p-2 bg-primary bg-opacity-20"
                 value={addingIngredient.amount}
                 onChange={(e) =>
                   setAddingIngredient((prev) => ({
@@ -89,7 +89,7 @@ const AddPage = () => {
               ></input>
               <span className="cols-span-1">Unit</span>
               <input
-                className="col-span-3 rounded-[20px] p-2"
+                className="col-span-3 rounded-[20px] p-2 bg-primary bg-opacity-20"
                 value={addingIngredient.unit}
                 onChange={(e) =>
                   setAddingIngredient((prev) => ({
