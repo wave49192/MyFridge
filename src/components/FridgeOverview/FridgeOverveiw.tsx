@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./FridgeOverview.css";
+import { Inventory } from "../../types/inventory";
 
-interface FoodItem {
-  name: string;
-}
-
-const FridgeOverview: React.FC = () => {
+const FridgeOverview: React.FC<Inventory> = ({ items }) => {
   const [currentComponent, setCurrentComponent] = useState<
     "Food" | "Ingredients"
   >("Food");
@@ -24,25 +21,6 @@ const FridgeOverview: React.FC = () => {
       mediaQuery.removeEventListener("change", handleResize);
     };
   }, []);
-
-  const foodItems: FoodItem[] = [
-    { name: "Onion" },
-    { name: "Tomato" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-    { name: "Apple" },
-  ];
 
   const showFoodComponent = () => {
     setCurrentComponent("Food");
@@ -89,15 +67,15 @@ const FridgeOverview: React.FC = () => {
           }`}
         >
           <h1 className="text-secondary font-bold text-xl">Food and Drinks</h1>
-          You have <span className="text-primary">{foodItems.length}</span>{" "}
+          You have <span className="text-primary">{items.length}</span>{" "}
           food(s) and drink(s) in your fridge
           <div className="overflow-y-scroll mobile:max-h-[240px] laptop:max-h-[400px] hide-scrollbar">
-            {foodItems.map((item, index) => (
+            {items.map((item, index) => (
               <div
                 key={index}
                 className="flex px-4 py-2 my-2 bg-primary-2 rounded-lg laptop:text-xl"
               >
-                <p>{item.name}</p>
+                <p>{item.ingredient.name}</p>
               </div>
             ))}
           </div>
@@ -112,15 +90,15 @@ const FridgeOverview: React.FC = () => {
           }`}
         >
           <h1 className="text-secondary font-bold text-xl">Ingredients</h1>
-          You have <span className="text-primary">{foodItems.length}</span>{" "}
+          You have <span className="text-primary">{items.length}</span>{" "}
           ingredient(s) in your fridge
           <div className="overflow-y-scroll mobile:max-h-[240px] laptop:max-h-[400px] hide-scrollbar">
-            {foodItems.map((item, index) => (
+            {items.map((item, index) => (
               <div
                 key={index}
                 className="flex px-4 py-2 my-2 bg-secondary bg-opacity-30 rounded-lg laptop:text-xl"
               >
-                <p>{item.name}</p>
+                <p>{item.ingredient.name}</p>
               </div>
             ))}
           </div>

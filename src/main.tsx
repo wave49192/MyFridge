@@ -11,6 +11,7 @@ import Login from "./pages/Login/Login.tsx";
 import Navbar from "./components/Navbar/Navbar.tsx";
 import DetectPage from "./pages/Inventory/Detect/Detect.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
+import AddPage from "./pages/Inventory/Add/Add.tsx";
 
 document.documentElement.setAttribute("data-theme", "emmy");
 const container = document.getElementById("root");
@@ -26,6 +27,7 @@ root.render(
           <Route path="/recipes" element={<RecipesPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/inventory/detect" element={<DetectPage />} />
+          <Route path="/inventory/add" element={<AddPage />} />
           <Route path="/recipe/:recipeId" element={<RecipeDetailsPage />} />
           <Route path="/login" element={<Login />} />
         </Routes>

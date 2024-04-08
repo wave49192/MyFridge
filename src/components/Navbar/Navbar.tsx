@@ -41,6 +41,7 @@ const Navbar: React.FC<NavbarNavigation> = () => {
           .then((res) => {
             storeUserToSession(
               {
+                id: res.data.user.id,
                 name: res.data.user.first_name,
                 picture: res.data.picture,
               },

@@ -6,6 +6,7 @@ const SearchBar = () => {
         placeholder="Search recipes"
         className="input rounded-2xl w-full pl-10 bg-accent bg-opacity-5 placeholder-accent placeholder-opacity-50"
         value={""}
+        onChange={() => {}}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"

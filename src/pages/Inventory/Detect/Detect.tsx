@@ -2,6 +2,7 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { MdImage } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const DetectPage = () => {
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
@@ -31,19 +32,28 @@ const DetectPage = () => {
     const formData = new FormData();
 
     formData.append("image", acceptedFiles[0]);
+    formData.append("imageType", acceptedFiles[0].type);
 
-    await axios.post("http://localhost:8000/detect/", formData).then((r) => {
-      setDetected(r.data);
-      setIsDetecting(false);
-    });
+    await axios
+      .post("http://localhost:8000/detect/", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((r) => {
+        setDetected(r.data);
+        setIsDetecting(false);
+      });
   }
 
   return (
     <div className="flex flex-col items-center gap-4 laptop:mx-20 hd:mx-60">
       <h1 className="text-3xl text-accent">Add Ingredient</h1>
       <div className="flex gap-4">
-        <a className="text-primary">Add manually</a>
-        <a className="text-primary">Image detection</a>
+        <Link to={"/inventory/add"}>
+          <a className="text-primary">Add manually</a>
+        </Link>
+        <a className="text-primary border-b">Image detection</a>
       </div>
       <div className="flex flex-col justify-start w-10/12 gap-4">
         <h2 className="text-2xl font-bold">Upload files</h2>
