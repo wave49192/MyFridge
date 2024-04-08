@@ -22,48 +22,52 @@ const DashboardPage: React.FC = () => {
   const [inventory, setInventory] = useState<Inventory | null>();
   const [cleanedIngredients, setCleanedIngredients] = useState<string[]>();
   const { user } = useAuth();
+  const fetchRecommendedRecipes = async () => {
+    try {
+      const response = await axios.post<Recipe[]>(
+        `http://127.0.0.1:8000/recommend-recipe/`,
+        {
+          recipes: [
+            {
+              cleaned_ingredients: cleanedIngredients?.join(", ") || "", // Join the ingredients into a comma-separated string
+            },
+          ],
+        }
+      );
+      setRecommendedRecipes(response.data);
+    } catch (error) {
+      console.error("Error fetching recommended recipes:", error);
+    }
+  };
+
+  const fetchUserInventory = async () => {
+    try {
+      const response = await axios.get<Inventory>(
+        `http://127.0.0.1:8000/inventory/user/?user_id=${user?.id}`
+      );
+      setInventory(response.data);
+
+      // Extract ingredient names from inventory items and set them to cleanedIngredients state
+      const ingredients = response.data.items.map(
+        (item) => item.ingredient.name
+      );
+      setCleanedIngredients(ingredients);
+    } catch (error) {
+      console.error("Error fetching user inventory:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchRecommendedRecipes = async () => {
-      try {
-        const response = await axios.post<Recipe[]>(
-          `http://127.0.0.1:8000/recommend-recipe/`,
-          {
-            recipes: [
-              {
-                cleaned_ingredients: cleanedIngredients?.join(", ") || "", // Join the ingredients into a comma-separated string
-              },
-            ],
-          }
-        );
-        setRecommendedRecipes(response.data);
-      } catch (error) {
-        console.error("Error fetching recommended recipes:", error);
-      }
-    };
-
-    const fetchUserInventory = async () => {
-      try {
-        const response = await axios.get<Inventory>(
-          `http://127.0.0.1:8000/inventory/user/?user_id=${user?.id}`
-        );
-        setInventory(response.data);
-
-        // Extract ingredient names from inventory items and set them to cleanedIngredients state
-        const ingredients = response.data.items.map(
-          (item) => item.ingredient.name
-        );
-        setCleanedIngredients(ingredients);
-      } catch (error) {
-        console.error("Error fetching user inventory:", error);
-      }
-    };
-
     if (user) {
-      fetchRecommendedRecipes();
       fetchUserInventory();
     }
-  }, [user, cleanedIngredients]);
+  }, [user]);
+
+  useEffect(() => {
+    if (cleanedIngredients) {
+      fetchRecommendedRecipes();
+    }
+  }, [cleanedIngredients]);
 
   return (
     <div className="laptop:mx-20 hd:mx-30">
