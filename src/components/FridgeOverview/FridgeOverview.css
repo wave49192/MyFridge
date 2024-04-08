@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom color utility */
+.custom-disabled {
+    /* Your custom styles for the disabled button */
+    opacity: 0.5;
+}
