@@ -97,7 +97,7 @@ const RecipeList: React.FC<RecipeListProps> = ({
         className={`grid gap-4 ${
           isShowOneRecipeCols
             ? "grid-cols-1 overflow-y-auto hide-scrollbar"
-            : "laptop:grid-cols-2 desktop:grid-cols-3"
+            : "laptop:grid-cols-2 hd:grid-cols-3"
         }`}
         style={{
           maxHeight: isShowOneRecipeCols ? `${screenHeight}px` : "none",

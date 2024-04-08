@@ -191,6 +191,7 @@ const RecipeDetailsPage: React.FC = () => {
               recommendedRecipes={recommendedRecipes}
               shuffleRecipe={true}
               recipesPerPage={24}
+              customTitle={"Similar Recipes"}
             />
           </div>
         )}
@@ -204,6 +205,7 @@ const RecipeDetailsPage: React.FC = () => {
             recommendedRecipes={recommendedRecipes}
             shuffleRecipe={true}
             recipesPerPage={2}
+            customTitle={"Similar Recipes"}
           />
         </div>
       )}
