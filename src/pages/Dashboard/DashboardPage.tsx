@@ -85,7 +85,7 @@ const DashboardPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="laptop:mx-20 hd:mx-30">
+    <div className="desktop:mx-20 hd:mx-30">
       <h1 className="text-4xl text-center font-bold mt-5 text-accent laptop:text-5xl laptop:my-12 ">
         Dashboard
       </h1>
@@ -99,8 +99,12 @@ const DashboardPage: React.FC = () => {
         </>
       ) : (
         <div>
-          <p className="text-center text-xl mb-20">
-            You don't have an inventory yet
+          <p className="text-center text-xl mb-20 mobile:mb-15 mt-10">
+            <span>You don't have an inventory yet</span>
+            <br />
+            <span className="mobile:text-[18px]">
+              Please login first to access the inventory system
+            </span>
           </p>
         </div>
       )}
