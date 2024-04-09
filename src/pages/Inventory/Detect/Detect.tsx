@@ -47,11 +47,13 @@ const DetectPage = () => {
       })
       .then((r) => {
         setIsDetecting(false);
-        setIngredientAmounts(r.data.detections.map((ingredient: Ingredient) => ({
-          ingredient: ingredient,
-          quantity: 0,
-          unit: "",
-        })))
+        setIngredientAmounts(
+          r.data.detections.map((ingredient: Ingredient) => ({
+            ingredient: ingredient,
+            quantity: 0,
+            unit: "",
+          }))
+        );
       });
   }
 
@@ -90,12 +92,16 @@ const DetectPage = () => {
         >
           {uploadedImage && !isDragActive ? (
             <div className="w-full h-full">
-              <img src={uploadedImage as string} alt="Upload" />
+              <img
+                src={uploadedImage as string}
+                alt="Upload"
+                className="uploadedImage"
+              />
             </div>
           ) : (
             <>
               <input {...getInputProps()} />
-              <MdImage className="text-secondary text-4xl" />
+              <MdImage className="text-secondary text-4xl e" />
               <p className="text-accent">
                 {!isDragActive ? "Drag and drop" : "Drop it here!"}
               </p>
@@ -120,7 +126,10 @@ const DetectPage = () => {
           <div className="w-1/3 bg-gradient-to-r from-[#DB2DEE] via-[#E23CBF] to-[#E94B8F] rounded-l-[20px]">
             <p className="invisible">1</p>
           </div>
-          <button onClick={handleAddIngredient}className="w-1/3 bg-gradient-to-r from-[#E94B8F] via-[#F15A60] to-[#F86930] text-base-100 flex justify-center items-center">
+          <button
+            onClick={handleAddIngredient}
+            className="w-1/3 bg-gradient-to-r from-[#E94B8F] via-[#F15A60] to-[#F86930] text-base-100 flex justify-center items-center"
+          >
             Add Ingredient
           </button>
           <div className="w-1/3 bg-gradient-to-r from-[#F86930] via-[#FF7801] to-[#FF7801] rounded-r-[20px] flex justify-start items-center">

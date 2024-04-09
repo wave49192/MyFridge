@@ -1,36 +1,34 @@
 import { test, expect } from "@playwright/test";
 
-test("can upload image by drag and drop", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
+test("DetectPage should render and detect ingredients from image", async ({
+  page,
+}) => {
+  await page.goto("http://localhost:5173/");
+  await page.getByRole("button", { name: "Log in" }).click();
+  await page.getByRole("button", { name: "Mock Login" }).click();
+  await page.getByRole("link", { name: "Inventory" }).click();
+  await page.getByRole("button", { name: "Try now" }).click();
+  await page.getByRole("button", { name: "Choose Image" }).click();
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  // Mock the image upload
+  const filePath = "./src/assets/2.jpg";
+  const input = await page.$("input[type=file]");
+  await input.setInputFiles(filePath);
+  const uploadedImageElement = await page.$(".uploadedImage");
+  expect(uploadedImageElement).not.toBeNull();
 
-test("can upload image by selecting", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
+  await page.getByRole("button", { name: "Start detecting" }).click();
+  const detectedIngredient = await page.waitForSelector(
+    'p:has-text("cucumber")'
+  );
+  expect(detectedIngredient).not.toBeNull();
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  await page.getByPlaceholder("Amount").click();
+  await page.getByPlaceholder("Amount").fill("02");
+  await page.getByPlaceholder("Unit").click();
+  await page.getByPlaceholder("Unit").fill("3");
+  await page.getByRole("button", { name: "Add Ingredient" }).click();
 
-test("should show loading when detecting", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("show results when done detecting", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("can navigate to add manually page", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  const addedIngredient = await page.waitForSelector('p:has-text("cucumber")');
+  expect(addedIngredient).not.toBeNull();
 });

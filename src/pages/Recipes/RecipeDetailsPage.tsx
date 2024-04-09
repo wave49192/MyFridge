@@ -112,11 +112,14 @@ const RecipeDetailsPage: React.FC = () => {
               className="w-full h-[300px] laptop:h-[460px] desktop:h-[550px] desktop:mx-auto object-cover hd:rounded-3xl"
             />
             <div className="p-5">
-              <h2 className="text-3xl laptop:text-4xl font-bold mb-1 text-secondary-green">
+              <h2 className="text-3xl laptop:text-4xl font-bold mb-1 text-secondary-green recipeTitle">
                 {recipe.title}
               </h2>
               <p className="text-lg laptop:text-2xl mb-5 font-semibold">
-                By<span className="text-primary"> {recipe.publisher}</span>
+                By
+                <span className="text-primary publisher">
+                  {recipe.publisher}
+                </span>
               </p>
               <div className="flex flex-wrap mb-3">
                 <div className="badge badge-primary p-3 mb-3 mr-3 text-white">
@@ -131,14 +134,14 @@ const RecipeDetailsPage: React.FC = () => {
               </div>
               <p className="text-md mb-2 font-semibold laptop:text-xl mb-10">
                 Cooking Time:{" "}
-                <span className="text-md text-primary">
+                <span className="text-md text-primary cookingTime">
                   {recipe.cooking_time} mins
                 </span>
               </p>
               <div className="w-full md:w-96 bg-base-100 shadow-xl bg-primary-2 bg-opacity-25">
                 <div className="card-body">
                   <div className="text-lg">
-                    <div className="text-center mb-4 font-bold text-primary opacity-75 laptop:text-2xl">
+                    <div className="text-center mb-4 font-bold text-primary opacity-75 laptop:text-2xl ingredients">
                       RECIPE INGREDIENTS
                     </div>
                   </div>
@@ -165,7 +168,7 @@ const RecipeDetailsPage: React.FC = () => {
           </div>
           <footer className="p-8 bg-secondary text-white bg-opacity-85 hd:rounded">
             <div className="max-w-screen-md mx-auto">
-              <h6 className="text-center text-white font-bold mb-3 ">
+              <h6 className="text-center text-white font-bold mb-3 stepToCook">
                 STEP TO COOK
               </h6>
               <p className="laptop:text-center">
