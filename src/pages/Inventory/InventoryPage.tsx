@@ -59,8 +59,7 @@ const InventoryPage: React.FC = () => {
           Object.entries(groupBy(res.data.items, (v) => v.ingredient.group))
         );
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, [user]);
 
   return (
@@ -80,7 +79,7 @@ const InventoryPage: React.FC = () => {
             <FaPencil className="text-accent" />
           </button>
         </div>
-        <div id='inventory'>
+        <div id="inventory">
           {inventory ? (
             Object.entries(
               groupBy(inventory.items, (v) => v.ingredient.group)
@@ -93,7 +92,7 @@ const InventoryPage: React.FC = () => {
                 >
                   {v[1].map((item, itemIndex) => (
                     <div className="flex items-center justify-between">
-                      <span className="text-base font-bold text-secondary">
+                      <span className="text-base font-bold text-secondary my-1 text-[18px]">
                         {item.ingredient.name}
                       </span>
                       <div className="flex justify-center gap-2">
@@ -102,7 +101,11 @@ const InventoryPage: React.FC = () => {
                         {isDeleting ? (
                           <input
                             type="checkbox"
-                            checked={selectedDeleting.filter(d => d.id === item.id)[0].checked}
+                            checked={
+                              selectedDeleting.filter(
+                                (d) => d.id === item.id
+                              )[0].checked
+                            }
                             onChange={(e) => {
                               setSelectedDeleting((prev) =>
                                 prev.map((p) => {
