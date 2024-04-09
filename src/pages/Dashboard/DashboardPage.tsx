@@ -19,6 +19,7 @@ interface Recipe {
 
 const DashboardPage: React.FC = () => {
   const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]);
+  const [allRecipes, setAllRecipes] = useState<Recipe[]>([]);
   const [inventory, setInventory] = useState<Inventory | null>();
   const [cleanedIngredients, setCleanedIngredients] = useState<string[]>();
   const { user } = useAuth();
@@ -56,6 +57,16 @@ const DashboardPage: React.FC = () => {
       console.error("Error fetching user inventory:", error);
     }
   };
+  const fetchRecipes = async () => {
+    try {
+      const response = await axios.get<Recipe[]>(
+        `http://127.0.0.1:8000/recipes/`
+      );
+      setAllRecipes(response.data);
+    } catch (error) {
+      console.error("Error fetching all recipes:", error);
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -69,26 +80,44 @@ const DashboardPage: React.FC = () => {
     }
   }, [cleanedIngredients]);
 
+  useEffect(() => {
+    fetchRecipes();
+  }, []);
+
   return (
     <div className="laptop:mx-20 hd:mx-30">
       <h1 className="text-4xl text-center font-bold mt-5 text-accent laptop:text-5xl laptop:my-12 ">
         Dashboard
       </h1>
       {inventory ? (
-        <FridgeOverview
-          id={inventory?.id}
-          items={inventory?.items}
-          owned_by={inventory?.owned_by}
-        />
+        <>
+          <FridgeOverview
+            id={inventory?.id}
+            items={inventory?.items}
+            owned_by={inventory?.owned_by}
+          />
+          <RecommendedRecipe
+            isInRecipeDetailsPage={false}
+            recommendedRecipes={recommendedRecipes}
+            shuffleRecipe={false}
+            recipesPerPage={6}
+          />
+        </>
       ) : (
-        <p>You don't have an inventory yet</p>
+        <div>
+          <p className="text-center text-xl mb-20">
+            You don't have an inventory yet
+          </p>
+
+          <RecommendedRecipe
+            isInRecipeDetailsPage={false}
+            recommendedRecipes={allRecipes}
+            shuffleRecipe={false}
+            recipesPerPage={6}
+            customTitle={"Explore our Recipes"}
+          />
+        </div>
       )}
-      <RecommendedRecipe
-        isInRecipeDetailsPage={false}
-        recommendedRecipes={recommendedRecipes}
-        shuffleRecipe={false}
-        recipesPerPage={6}
-      />
     </div>
   );
 };
