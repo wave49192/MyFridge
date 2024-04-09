@@ -2,7 +2,12 @@ import axios from "axios";
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { MdImage } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import DetectedIngredients from "../../../components/DetectedIngredients/DetectedIngredients";
+import { Ingredient, InventoryItem } from "../../../types/inventory";
+import { useAuth } from "../../../context/AuthContext";
+
+type Item = Omit<InventoryItem, "id">;
 
 const DetectPage = () => {
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
@@ -19,14 +24,14 @@ const DetectPage = () => {
   const [uploadedImage, setUploadedImage] = useState<
     string | ArrayBuffer | null
   >(null);
-  const [detected, setDetected] = useState<Detection>({ detections: [] });
   const [isDetecting, setIsDetecting] = useState<boolean>(false);
-  const [isStartDetecting, setIsStartDetecting] = useState<boolean>(false);
+  const [ingredientAmounts, setIngredientAmounts] = useState<Item[]>([]);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     setIsDetecting(true);
-    setIsStartDetecting(true);
     if (typeof acceptedFiles[0] === "undefined") return;
 
     const formData = new FormData();
@@ -41,10 +46,34 @@ const DetectPage = () => {
         },
       })
       .then((r) => {
-        setDetected(r.data);
         setIsDetecting(false);
+        setIngredientAmounts(
+          r.data.detections.map((ingredient: Ingredient) => ({
+            ingredient: ingredient,
+            quantity: 0,
+            unit: "",
+          }))
+        );
       });
   }
+
+  const handleAddIngredient = () => {
+    axios
+      .get(`http://localhost:8000/inventory/user/?user_id=${user?.id}`)
+      .then((res) =>
+        axios
+          .post(`http://localhost:8000/inventory/${res.data.id}/ingredients/`, {
+            ingredients: ingredientAmounts.map((a) => ({
+              ingredient: a.ingredient.id,
+              amount: a.quantity,
+              unit: a.unit,
+            })),
+          })
+          .then((res) => {
+            navigate("/inventory");
+          })
+      );
+  };
 
   return (
     <div className="flex flex-col items-center gap-4 laptop:mx-20 hd:mx-60">
@@ -63,12 +92,16 @@ const DetectPage = () => {
         >
           {uploadedImage && !isDragActive ? (
             <div className="w-full h-full">
-              <img src={uploadedImage as string} alt="Upload" />
+              <img
+                src={uploadedImage as string}
+                alt="Upload"
+                className="uploadedImage"
+              />
             </div>
           ) : (
             <>
               <input {...getInputProps()} />
-              <MdImage className="text-secondary text-4xl" />
+              <MdImage className="text-secondary text-4xl e" />
               <p className="text-accent">
                 {!isDragActive ? "Drag and drop" : "Drop it here!"}
               </p>
@@ -79,34 +112,47 @@ const DetectPage = () => {
           )}
         </div>
       </div>
-      {isStartDetecting && detected.detections.length === 0 && !isDetecting ? (
+      {ingredientAmounts.length === 0 && !isDetecting ? (
         <div>No ingredients detected</div>
       ) : (
-        detected.detections.map((v, i) => (
-          <div
-            key={i}
-            className="flex px-4 py-3 my-2 bg-primary-2 bg-opacity-25 rounded-2xl laptop:text-xl"
-          >
-            <p className="text-base font-bold text-secondary">{v}</p>
-          </div>
-        ))
+        <DetectedIngredients
+          items={ingredientAmounts}
+          setItems={setIngredientAmounts}
+        />
       )}
 
-      <div className="h-12 w-10/12 m-4 flex sticky bottom-5">
-        <div className="w-1/3 bg-gradient-to-r from-[#DB2DEE] via-[#E23CBF] to-[#E94B8F] rounded-l-[20px]">
-          <p className="invisible">1</p>
+      {ingredientAmounts.length !== 0 ? (
+        <div className="h-12 w-10/12 m-4 flex sticky bottom-5">
+          <div className="w-1/3 bg-gradient-to-r from-[#DB2DEE] via-[#E23CBF] to-[#E94B8F] rounded-l-[20px]">
+            <p className="invisible">1</p>
+          </div>
+          <button
+            onClick={handleAddIngredient}
+            className="w-1/3 bg-gradient-to-r from-[#E94B8F] via-[#F15A60] to-[#F86930] text-base-100 flex justify-center items-center"
+          >
+            Add Ingredient
+          </button>
+          <div className="w-1/3 bg-gradient-to-r from-[#F86930] via-[#FF7801] to-[#FF7801] rounded-r-[20px] flex justify-start items-center">
+            <p className="invisible">1</p>✨
+          </div>
         </div>
-        <button
-          onClick={handleOnSubmit}
-          className="w-1/3 bg-gradient-to-r from-[#E94B8F] via-[#F15A60] to-[#F86930] text-base-100 flex justify-center items-center"
-        >
-          {!isDetecting ? "Start detecting" : <Loading />}
-        </button>
-        <div className="w-1/3 bg-gradient-to-r from-[#F86930] via-[#FF7801] to-[#FF7801] rounded-r-[20px] flex justify-start items-center">
-          <p className="invisible">1</p>
-          {!isDetecting ? "✨" : <></>}
+      ) : (
+        <div className="h-12 w-10/12 m-4 flex sticky bottom-5">
+          <div className="w-1/3 bg-gradient-to-r from-[#DB2DEE] via-[#E23CBF] to-[#E94B8F] rounded-l-[20px]">
+            <p className="invisible">1</p>
+          </div>
+          <button
+            onClick={handleOnSubmit}
+            className="w-1/3 bg-gradient-to-r from-[#E94B8F] via-[#F15A60] to-[#F86930] text-base-100 flex justify-center items-center"
+          >
+            {!isDetecting ? "Start detecting" : <Loading />}
+          </button>
+          <div className="w-1/3 bg-gradient-to-r from-[#F86930] via-[#FF7801] to-[#FF7801] rounded-r-[20px] flex justify-start items-center">
+            <p className="invisible">1</p>
+            {!isDetecting ? "✨" : <></>}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

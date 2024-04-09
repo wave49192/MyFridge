@@ -16,3 +16,10 @@ export interface Inventory {
   items: InventoryItem[];
   owned_by: number;
 }
+
+export interface AddingIngredient {
+  ingredient: number;
+  name: string;
+  amount: number;
+  unit: string;
+}

@@ -1,6 +1,6 @@
 const SearchBar = () => {
   return (
-    <div className="relative">
+    <div className="flex-1 relative">
       <input
         type="text"
         placeholder="Search recipes"

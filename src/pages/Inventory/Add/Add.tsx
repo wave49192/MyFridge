@@ -44,7 +44,6 @@ const AddPage = () => {
             })),
           })
           .then((res) => {
-            console.log(res.data);
             navigate("/inventory");
           })
       );
@@ -78,18 +77,18 @@ const AddPage = () => {
               </div>
               <span className="cols-span-1">Amount</span>
               <input
-                className="col-span-3 rounded-[20px] p-2"
+                className="col-span-3 rounded-[20px] p-2 bg-primary bg-opacity-20"
                 value={addingIngredient.amount}
                 onChange={(e) =>
                   setAddingIngredient((prev) => ({
                     ...prev,
-                    amount: parseInt(e.target.value),
+                    amount: parseInt(e.target.value) || 0,
                   }))
                 }
               ></input>
               <span className="cols-span-1">Unit</span>
               <input
-                className="col-span-3 rounded-[20px] p-2"
+                className="col-span-3 rounded-[20px] p-2 bg-primary bg-opacity-20"
                 value={addingIngredient.unit}
                 onChange={(e) =>
                   setAddingIngredient((prev) => ({

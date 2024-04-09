@@ -15,7 +15,7 @@ const LinkWithHighlightAtLocation: React.FC<{
 }> = ({ location, pathName, currentLocation }) => (
   <Link
     to={"/" + location}
-    className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
+    className={`btn btn-ghost mobile:text-sm rounded-full laptop:mx-3 ${
       currentLocation.pathname.split("/")[1] === location
         ? "bg-primary text-white hover:bg-primary"
         : ""
@@ -26,9 +26,14 @@ const LinkWithHighlightAtLocation: React.FC<{
 );
 
 const Navbar: React.FC<NavbarNavigation> = () => {
-  const { isAuthenticated, user, storeUserToSession, getUserFromSession, clearUserFromSession } =
-    useAuth();
-  const navigate = useNavigate()
+  const {
+    isAuthenticated,
+    user,
+    storeUserToSession,
+    getUserFromSession,
+    clearUserFromSession,
+  } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -47,7 +52,7 @@ const Navbar: React.FC<NavbarNavigation> = () => {
               },
               res.data.access_token
             );
-            navigate("/")
+            navigate("/");
             window.location.reload();
           })
           .catch((err) => {
@@ -67,12 +72,6 @@ const Navbar: React.FC<NavbarNavigation> = () => {
         <LinkWithHighlightAtLocation
           location={""}
           currentLocation={location}
-          pathName={"Home"}
-        />
-
-        <LinkWithHighlightAtLocation
-          location={"dashboard"}
-          currentLocation={location}
           pathName={"Dashboard"}
         />
         <LinkWithHighlightAtLocation
@@ -87,7 +86,9 @@ const Navbar: React.FC<NavbarNavigation> = () => {
         />
         {!user?.picture ? (
           <Link to={"/login"}>
-            <button className="btn btn-outline btn-primary">Log in</button>
+            <button className="btn btn-outline btn-primary ml-4 rounded-full">
+              Log in
+            </button>
           </Link>
         ) : (
           <div className="dropdown dropdown-end">
