@@ -1,50 +1,20 @@
 import { test, expect } from "@playwright/test";
 
-test("can add 1 ingredient at a time", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("selecting ingredient has autocomplete", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("when confirm ingredient, adding tab should disappear", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("can delete unwanted ingredient", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("can delete all by clicking cancel", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("can navigate to detection page", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("when add ingredient should redirect to inventory page and have new added ingredients", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+test("add ingredient", async ({ page }) => {
+  await page.goto("http://localhost:5173/");
+  await page.getByRole("button", { name: "Log in" }).click();
+  await page.getByRole("button", { name: "Mock Login" }).click();
+  await page.getByRole("link", { name: "Inventory" }).click();
+  await page.getByRole("link", { name: "+ Add Ingredient" }).click();
+  await page.getByRole("button", { name: "Add more ingredient" }).click();
+  await page.getByLabel("Select Ingredients").click();
+  await page.getByRole("option", { name: "yeast", exact: true }).click();
+  await page.getByRole("textbox").first().click();
+  await page.getByRole("textbox").first().fill("03");
+  await page.getByRole("textbox").nth(1).click();
+  await page.getByRole("textbox").nth(1).fill("tbsp");
+  await page.getByText("✓").click();
+  await page.getByRole("button", { name: "Add ingredients" }).click();
+  const addedIngredient = await page.waitForSelector('span:has-text("yeast")');
+  expect(addedIngredient).not.toBeNull();
 });
