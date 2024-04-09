@@ -96,27 +96,32 @@ const DashboardPage: React.FC = () => {
             items={inventory?.items}
             owned_by={inventory?.owned_by}
           />
-          <RecommendedRecipe
-            isInRecipeDetailsPage={false}
-            recommendedRecipes={recommendedRecipes}
-            shuffleRecipe={false}
-            recipesPerPage={6}
-          />
         </>
       ) : (
         <div>
           <p className="text-center text-xl mb-20">
             You don't have an inventory yet
           </p>
-
-          <RecommendedRecipe
-            isInRecipeDetailsPage={false}
-            recommendedRecipes={allRecipes}
-            shuffleRecipe={false}
-            recipesPerPage={6}
-            customTitle={"Explore our Recipes"}
-          />
         </div>
+      )}
+
+      {inventory?.items?.length && inventory.items.length > 0 ? (
+        // Your code when inventory and items are defined and the length is greater than 0
+        <RecommendedRecipe
+          isInRecipeDetailsPage={false}
+          recommendedRecipes={recommendedRecipes}
+          shuffleRecipe={false}
+          recipesPerPage={6}
+        />
+      ) : (
+        // Your code when inventory or items are undefined, or the length is 0
+        <RecommendedRecipe
+          isInRecipeDetailsPage={false}
+          recommendedRecipes={allRecipes}
+          shuffleRecipe={false}
+          recipesPerPage={6}
+          customTitle={"Explore our Recipes"}
+        />
       )}
     </div>
   );
