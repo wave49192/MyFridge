@@ -12,7 +12,6 @@ test("dashboard tab goes to dashboard page", async ({ page }) => {
 });
 
 test("inventory tab goes to inventory page", async ({ page }) => {
-  await page.goto("http://localhost:5173");
   await page.getByRole("button", { name: "Log in" }).click();
   await page.getByRole("button", { name: "Mock Login" }).click();
   await page.getByRole("link", { name: "Inventory" }).click();
@@ -32,7 +31,6 @@ test("show login button when not logged in", async ({ page }) => {
 });
 
 test("show user profile when authenticated", async ({ page }) => {
-  await page.goto("http://localhost:5173");
   await page.click('button:has-text("Log in")');
   await page.click('button:has-text("Mock Login")');
   const userProfileButton = await page.waitForSelector(".avatar");
