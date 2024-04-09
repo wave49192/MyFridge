@@ -86,7 +86,9 @@ const Navbar: React.FC<NavbarNavigation> = () => {
         />
         {!user?.picture ? (
           <Link to={"/login"}>
-            <button className="btn btn-outline btn-primary">Log in</button>
+            <button className="btn btn-outline btn-primary ml-2 rounded-full">
+              Log in
+            </button>
           </Link>
         ) : (
           <div className="dropdown dropdown-end">
