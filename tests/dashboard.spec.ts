@@ -1,45 +1,30 @@
 import { test, expect } from "@playwright/test";
-
-test("show all sections", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+test.beforeEach(async ({ page }) => {
+  await page.goto("http://localhost:5173");
 });
 
-test("overview section shows all the ingredient information in fridge", async ({
-  page,
-}) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+test("DashboardPage not login ", async ({ page }) => {
+  const notLoginText = await page.waitForSelector(
+    'span:has-text("You don\'t have an inventory yet")'
+  );
+  const exploreText = await page.waitForSelector(
+    "h1:has-text('Explore our Recipes')"
+  );
+  expect(notLoginText).not.toBeNull();
+  expect(exploreText).not.toBeNull();
 });
 
-test("recommend recipe section show recipe correctly", async ({ page }) => {
-  await page.goto("https://playwright.dev/");
+test("DashboardPage login", async ({ page }) => {
+  await page.click("button:text('Log in')");
+  await page.click("button:text('Mock Login')");
+  await page.getByRole("link", { name: "Dashboard" }).click();
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  const overviewText = await page.waitForSelector(
+    "h1:has-text('Overview Fridge')"
+  );
+  expect(overviewText).not.toBeNull();
+  const recommendedText = await page.waitForSelector(
+    "h1:has-text('Recommended Recipes')"
+  );
+  expect(recommendedText).not.toBeNull();
 });
-
-test("recipe pagination show new recipes and can navigate back and forth", async ({
-  page,
-}) => {
-  await page.goto("https://playwright.dev/");
-
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
-
-test("user not login show not show fridge", async ({
-    page,
-  }) => {
-    await page.goto("https://playwright.dev/");
-  
-    // Expect a title "to contain" a substring.
-    await expect(page).toHaveTitle(/Playwright/);
-  });
-
-
-
