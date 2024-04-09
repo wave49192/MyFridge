@@ -85,14 +85,16 @@ const InventoryPage: React.FC = () => {
               groupBy(inventory.items, (v) => v.ingredient.group)
             ).map((v, i) => (
               <>
-                <p className="text-primary">{getEmojiByGroupName(v[0])}</p>
+                <p className="text-primary font-bold">
+                  {getEmojiByGroupName(v[0])}
+                </p>
                 <div
                   key={i}
                   className="flex flex-col px-4 py-3 my-2 bg-primary-2 bg-opacity-25 rounded-2xl laptop:text-xl"
                 >
                   {v[1].map((item, itemIndex) => (
                     <div className="flex items-center justify-between">
-                      <span className="text-base font-bold text-secondary my-1 text-[18px]">
+                      <span className="text-base font-semibold text-secondary my-1 text-[18px]">
                         {item.ingredient.name}
                       </span>
                       <div className="flex justify-center gap-2">
