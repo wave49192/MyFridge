@@ -5,7 +5,7 @@ const Login = () => {
   const [username, setUsername] = useState(
     localStorage.getItem("googleFirstName")
   );
-  const { setMockUser } = useAuth()
+  const { setMockUser } = useAuth();
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("user_google");
@@ -41,10 +41,10 @@ const Login = () => {
     setUsername("");
   };
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
+    <div className="flex flex-col items-center h-screen bg-base-200">
       {!username && (
         <button
-          className="bg-white text-gray-800 font-bold py-2 px-4 border rounded shadow  focus:outline-none  mb-8  mb-4"
+          className="bg-white text-gray-800 font-bold py-2 px-4 border rounded-full shadow  focus:outline-none  mb-8 mt-20"
           onClick={openGoogleLoginPage}
         >
           <div className="flex items-center justify-center">
@@ -91,7 +91,12 @@ const Login = () => {
       ) : (
         <small className="text-primary-600">Ops not Logged in yet</small>
       )}
-      <button onClick={setMockUser}>Mock Login</button>
+      <button
+        onClick={setMockUser}
+        className="bg-white text-gray-800 font-bold py-2 px-4 border rounded-full shadow  focus:outline-none mt-5"
+      >
+        Mock Login
+      </button>
     </div>
   );
 };
