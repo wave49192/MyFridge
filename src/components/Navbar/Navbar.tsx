@@ -15,7 +15,7 @@ const LinkWithHighlightAtLocation: React.FC<{
 }> = ({ location, pathName, currentLocation }) => (
   <Link
     to={"/" + location}
-    className={`btn btn-ghost mobile:text-xs rounded-full laptop:mx-3 ${
+    className={`btn btn-ghost mobile:text-sm rounded-full laptop:mx-3 ${
       currentLocation.pathname.split("/")[1] === location
         ? "bg-primary text-white hover:bg-primary"
         : ""
@@ -86,7 +86,7 @@ const Navbar: React.FC<NavbarNavigation> = () => {
         />
         {!user?.picture ? (
           <Link to={"/login"}>
-            <button className="btn btn-outline btn-primary ml-2 rounded-full">
+            <button className="btn btn-outline btn-primary ml-4 rounded-full">
               Log in
             </button>
           </Link>
