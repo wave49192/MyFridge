@@ -44,7 +44,6 @@ const AddPage = () => {
             })),
           })
           .then((res) => {
-            console.log(res.data);
             navigate("/inventory");
           })
       );
@@ -83,7 +82,7 @@ const AddPage = () => {
                 onChange={(e) =>
                   setAddingIngredient((prev) => ({
                     ...prev,
-                    amount: parseInt(e.target.value),
+                    amount: parseInt(e.target.value) || 0,
                   }))
                 }
               ></input>
