@@ -1,3 +1,5 @@
-interface Detection {
-    detections: string[]
+import { Ingredient } from "./inventory";
+
+export interface Detection {
+    detections: Ingredient[]
 }

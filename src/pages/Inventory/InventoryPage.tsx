@@ -89,10 +89,10 @@ const InventoryPage: React.FC = () => {
                 <p className="text-primary">{getEmojiByGroupName(v[0])}</p>
                 <div
                   key={i}
-                  className="flex items-center justify-between px-4 py-3 my-2 bg-primary-2 bg-opacity-25 rounded-2xl laptop:text-xl"
+                  className="flex flex-col px-4 py-3 my-2 bg-primary-2 bg-opacity-25 rounded-2xl laptop:text-xl"
                 >
                   {v[1].map((item, itemIndex) => (
-                    <>
+                    <div className="flex items-center justify-between">
                       <span className="text-base font-bold text-secondary">
                         {item.ingredient.name}
                       </span>
@@ -102,7 +102,7 @@ const InventoryPage: React.FC = () => {
                         {isDeleting ? (
                           <input
                             type="checkbox"
-                            checked={selectedDeleting[i].checked}
+                            checked={selectedDeleting.filter(d => d.id === item.id)[0].checked}
                             onChange={(e) => {
                               setSelectedDeleting((prev) =>
                                 prev.map((p) => {
@@ -122,7 +122,7 @@ const InventoryPage: React.FC = () => {
                           <></>
                         )}
                       </div>
-                    </>
+                    </div>
                   ))}
                 </div>
               </>

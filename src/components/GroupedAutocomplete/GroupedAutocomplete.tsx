@@ -24,6 +24,7 @@ const GroupedAutocomplete: React.FC<Props> = ({ ingredients, setIngredients }) =
       onChange={(event: any, newValue: Ingredient | null) => {
         setIngredients((prev: any) => ({...prev, ingredient: newValue?.id, name: newValue?.name}));
       }}
+      isOptionEqualToValue={(option, value) => option.group === value.group}
     />
   );
 };
