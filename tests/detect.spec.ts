@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("DetectPage should render and detect ingredients from image", async ({
+test("DetectPage should render and detect ingredients from image and also successfully added to inventory", async ({
   page,
 }) => {
   await page.goto("http://localhost:5173/");
@@ -13,7 +13,7 @@ test("DetectPage should render and detect ingredients from image", async ({
   // Mock the image upload
   const filePath = "./src/assets/2.jpg";
   const input = await page.$("input[type=file]");
-  await input.setInputFiles(filePath);
+  await input?.setInputFiles(filePath);
   const uploadedImageElement = await page.$(".uploadedImage");
   expect(uploadedImageElement).not.toBeNull();
 
