@@ -72,12 +72,6 @@ const Navbar: React.FC<NavbarNavigation> = () => {
         <LinkWithHighlightAtLocation
           location={""}
           currentLocation={location}
-          pathName={"Home"}
-        />
-
-        <LinkWithHighlightAtLocation
-          location={"dashboard"}
-          currentLocation={location}
           pathName={"Dashboard"}
         />
         <LinkWithHighlightAtLocation

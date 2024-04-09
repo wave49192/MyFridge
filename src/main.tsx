@@ -18,12 +18,11 @@ const container = document.getElementById("root");
 const root = createRoot(container!);
 root.render(
   <React.StrictMode>
-      <Router>
+    <Router>
       <AuthProvider>
         <Navbar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/" element={<DashboardPage />} />
           <Route path="/recipes" element={<RecipesPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/inventory/detect" element={<DetectPage />} />
@@ -32,6 +31,6 @@ root.render(
           <Route path="/login" element={<Login />} />
         </Routes>
       </AuthProvider>
-      </Router>
+    </Router>
   </React.StrictMode>
 );
