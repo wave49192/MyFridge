@@ -3,6 +3,39 @@ import "./FridgeOverview.css";
 import { Inventory } from "../../types/inventory";
 import { Link } from "react-router-dom";
 
+const mockFridgeValue = [
+  {
+    id: 15,
+    ingredient: {
+      id: 6759,
+      name: "Water",
+      group: "Drinks",
+    },
+    quantity: 3,
+    unit: "pcs",
+  },
+  {
+    id: 15,
+    ingredient: {
+      id: 67592,
+      name: "Strawberry Cake",
+      group: "Food",
+    },
+    quantity: 2,
+    unit: "boxes",
+  },
+  {
+    id: 15,
+    ingredient: {
+      id: 67592,
+      name: "Coca Cola",
+      group: "Food",
+    },
+    quantity: 2,
+    unit: "boxes",
+  },
+];
+
 const FridgeOverview: React.FC<Inventory> = ({ items }) => {
   const [currentComponent, setCurrentComponent] = useState<
     "Food" | "Ingredients"
@@ -68,10 +101,11 @@ const FridgeOverview: React.FC<Inventory> = ({ items }) => {
           }`}
         >
           <h1 className="text-secondary font-bold text-xl">Food and Drinks</h1>
-          You have <span className="text-primary">{items.length}</span> food(s)
+          You have{" "}
+          <span className="text-primary">{mockFridgeValue.length}</span> food(s)
           and drink(s) in your fridge
           <div className="overflow-y-scroll mobile:max-h-[240px] laptop:max-h-[400px] hide-scrollbar">
-            {items.map((item, index) => (
+            {mockFridgeValue.map((item, index) => (
               <div
                 key={index}
                 className="flex px-4 py-2 my-2 bg-primary-2 rounded-lg laptop:text-xl"
