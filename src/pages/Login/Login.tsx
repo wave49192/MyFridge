@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState(
     localStorage.getItem("googleFirstName")
   );
+  const { setMockUser } = useAuth()
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("user_google");
-    console.log(import.meta.env.VITE_GOOGLE_CLIENT_ID);
 
     if (storedUsername) {
       setUsername(storedUsername);
@@ -90,6 +91,7 @@ const Login = () => {
       ) : (
         <small className="text-primary-600">Ops not Logged in yet</small>
       )}
+      <button onClick={setMockUser}>Mock Login</button>
     </div>
   );
 };

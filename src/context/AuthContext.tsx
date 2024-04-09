@@ -14,6 +14,7 @@ type User = {
 type IAuthContext = {
   user: User | null
   isAuthenticated: boolean
+  setMockUser: () => void
   storeUserToSession: (user: User, accessToken: string) => void
   getUserFromSession: () => void
   clearUserFromSession: () => void
@@ -22,6 +23,7 @@ type IAuthContext = {
 const initialValue = {
   user: null,
   isAuthenticated: false,
+  setMockUser: () => {},
   storeUserToSession: () => {},
   getUserFromSession: () => {},
   clearUserFromSession: () => {}
@@ -53,8 +55,19 @@ const AuthProvider = ({ children }: Props) => {
     navigate('/')
   }
 
+  const setMockUser = () => {
+    const user = {
+      id: 1,
+      name: "Poomtum",
+      picture: "https://lh3.googleusercontent.com/a/ACg8ocIeGpZV5RcQdZ_XueM3CuysGhtv-gisNpdKTRQJk-1N1h75_s_Z=s96-c"
+    }
+    storeUserToSession(user, '')
+    navigate("/dashboard")
+    window.location.reload()
+  }
+
   return (
-    <AuthContext.Provider value={{isAuthenticated, user, storeUserToSession, getUserFromSession, clearUserFromSession}}>
+    <AuthContext.Provider value={{setMockUser, isAuthenticated, user, storeUserToSession, getUserFromSession, clearUserFromSession}}>
       {children}
     </AuthContext.Provider>
   )
