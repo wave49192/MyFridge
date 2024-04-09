@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./FridgeOverview.css";
 import { Inventory } from "../../types/inventory";
+import { Link } from "react-router-dom";
 
 const FridgeOverview: React.FC<Inventory> = ({ items }) => {
   const [currentComponent, setCurrentComponent] = useState<
@@ -37,9 +38,9 @@ const FridgeOverview: React.FC<Inventory> = ({ items }) => {
           <h1 className="mobile:text-[27px] text-4xl font-bold mobile:font-semibold hd:mb-6">
             Overview Fridge
           </h1>
-          {/* <a href="" className="mt-2 ml-3">
+          <Link to={"/inventory"} className="mt-3 ml-2">
             <p className="text-md underline">View All</p>
-          </a> */}
+          </Link>
         </div>
         {!isLaptopScreen && (
           <div className="laptop:hidden join grid grid-cols-2">
@@ -67,8 +68,8 @@ const FridgeOverview: React.FC<Inventory> = ({ items }) => {
           }`}
         >
           <h1 className="text-secondary font-bold text-xl">Food and Drinks</h1>
-          You have <span className="text-primary">{items.length}</span>{" "}
-          food(s) and drink(s) in your fridge
+          You have <span className="text-primary">{items.length}</span> food(s)
+          and drink(s) in your fridge
           <div className="overflow-y-scroll mobile:max-h-[240px] laptop:max-h-[400px] hide-scrollbar">
             {items.map((item, index) => (
               <div
