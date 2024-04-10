@@ -1,12 +1,26 @@
-const SearchBar = () => {
+import { useState } from "react";
+import { Inventory, InventoryItem } from "../../types/inventory";
+import { setItem } from "localforage";
+
+interface Props {
+  inventory: Inventory | null
+  setInventory: React.Dispatch<React.SetStateAction<Inventory | null>>
+}
+
+const SearchBar: React.FC<Props> = ({ inventory, setInventory }) => {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+
   return (
     <div className="flex-1 relative">
       <input
         type="text"
         placeholder="Search recipes"
         className="input rounded-2xl w-full pl-10 bg-accent bg-opacity-5 placeholder-accent placeholder-opacity-50"
-        value={""}
-        onChange={() => {}}
+        value={searchTerm}
+        onChange={e => {
+          setSearchTerm(e.target.value)
+          setInventory({...inventory, items: inventory?.items.filter(item => item.ingredient.name.includes(searchTerm))} as Inventory)
+        }}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"

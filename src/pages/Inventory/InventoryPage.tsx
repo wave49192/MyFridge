@@ -55,9 +55,6 @@ const InventoryPage: React.FC = () => {
         setSelectedDeleting(
           res.data.items.map((d) => ({ id: d.id, checked: false }))
         );
-        console.log(
-          Object.entries(groupBy(res.data.items, (v) => v.ingredient.group))
-        );
       })
       .catch((err) => {});
   }, [user]);
@@ -68,10 +65,10 @@ const InventoryPage: React.FC = () => {
       <div className="flex flex-col gap-4 w-10/12">
         <TryFeature />
         <div className="w-full flex items-center gap-4">
-          <SearchBar />
-          <button className="btn bg-accent bg-opacity-5 text-base-100 h-12 rounded-2xl">
+          {inventory ? <SearchBar setInventory={setInventory} inventory={inventory} /> : <></>}
+          {/* <button className="btn bg-accent bg-opacity-5 text-base-100 h-12 rounded-2xl">
             <AiFillControl className="text-accent" />
-          </button>
+          </button> */}
           <button
             onClick={() => setIsDeleting(true)}
             className="btn bg-accent bg-opacity-5 text-base-100 h-12 rounded-2xl"
@@ -137,7 +134,6 @@ const InventoryPage: React.FC = () => {
           )}
         </div>
       </div>
-      <Pagination />
       {!isDeleting ? (
         <Link to={"/inventory/add"} className="w-10/12 sticky bottom-5">
           <div className="w-full btn rounded-3xl bg-primary text-base-100 sticky bottom-5">
