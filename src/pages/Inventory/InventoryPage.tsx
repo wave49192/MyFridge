@@ -139,22 +139,22 @@ const InventoryPage: React.FC = () => {
       </div>
       <Pagination />
       {!isDeleting ? (
-        <Link to={"/inventory/add"} className="w-10/12">
+        <Link to={"/inventory/add"} className="w-10/12 sticky bottom-5">
           <div className="w-full btn rounded-3xl bg-primary text-base-100 sticky bottom-5">
             + Add Ingredient
           </div>
         </Link>
       ) : (
-        <div className="flex w-10/12 gap-2">
+        <div className="flex w-10/12 gap-2 sticky bottom-5">
           <div
             onClick={handleDeleteIngredients}
-            className="w-9/12 btn rounded-3xl bg-primary text-base-100 sticky bottom-5"
+            className="w-9/12 btn rounded-3xl bg-primary text-base-100"
           >
             Delete Selected Ingredient(s)
           </div>
           <div
             onClick={() => setIsDeleting(false)}
-            className="btn rounded-3xl text-primary border border-primary bg-base-100 sticky bottom-5"
+            className="btn rounded-3xl text-primary border border-primary bg-base-100"
           >
             Cancel
           </div>

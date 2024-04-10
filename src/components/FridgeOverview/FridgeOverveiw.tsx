@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./FridgeOverview.css";
-import { Inventory } from "../../types/inventory";
+import { Inventory, InventoryItem } from "../../types/inventory";
 import { Link } from "react-router-dom";
+import { getEmojiByGroupName } from "../../utils/emojitify";
 
 const mockFridgeValue = [
   {
@@ -64,10 +65,23 @@ const FridgeOverview: React.FC<Inventory> = ({ items }) => {
     setCurrentComponent("Ingredients");
   };
 
+  const groupBy = (
+    array: InventoryItem[],
+    predicate: (
+      value: InventoryItem,
+      index: number,
+      array: InventoryItem[]
+    ) => string
+  ) =>
+    array.reduce((acc, value, index, array) => {
+      (acc[predicate(value, index, array)] ||= []).push(value);
+      return acc;
+    }, {} as { [key: string]: InventoryItem[] });
+
   return (
     <div className="mx-5 bg-base-100 p-4 rounded-mdjustify-center">
       <div className="flex items-center mb-2 justify-between">
-        <div className="flex">
+        <div className="flex flex-1 justify-between">
           <h1 className="mobile:text-[27px] text-4xl font-bold mobile:font-semibold hd:mb-6">
             Overview Fridge
           </h1>
@@ -75,27 +89,9 @@ const FridgeOverview: React.FC<Inventory> = ({ items }) => {
             <p className="text-md underline">View All</p>
           </Link>
         </div>
-        {!isLaptopScreen && (
-          <div className="laptop:hidden join grid grid-cols-2">
-            <button
-              onClick={showFoodComponent}
-              className={`join-item btn btn-outline rounded-full bg-primary text-xl text-white 
-            ${currentComponent === "Food" ? "custom-disabled" : ""}`}
-            >
-              &lt;
-            </button>
-            <button
-              onClick={showIngredientsComponent}
-              className={`join-item btn btn-outline rounded-full bg-primary text-xl text-white 
-            ${currentComponent === "Ingredients" ? "custom-disabled" : ""}`}
-            >
-              &gt;
-            </button>
-          </div>
-        )}
       </div>
       <div className="laptop:flex">
-        <div
+        {/* <div
           className={`space-y-2 bg-primary-2 bg-opacity-25 p-4 rounded-lg mb-5 laptop:flex-1 laptop:mr-12 ${
             currentComponent === "Food" ? "" : isLaptopScreen ? "" : "hidden"
           }`}
@@ -137,6 +133,16 @@ const FridgeOverview: React.FC<Inventory> = ({ items }) => {
               </div>
             ))}
           </div>
+        </div> */}
+        <div className="flex gap-4 overflow-x-auto w-full bg-primary-content bg-opacity-25 rounded-[20px] p-10">
+          {Object.entries(groupBy(items, (v) => v.ingredient.group)).map(
+            (item) => (
+              <div className="p-8 rounded-lg w-min bg-white text-center">
+                <p className="font-bold">{getEmojiByGroupName(item[0])}</p>
+                <p>{item[1].length} item(s)</p>
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>
