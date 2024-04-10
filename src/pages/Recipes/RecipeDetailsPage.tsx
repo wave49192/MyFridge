@@ -182,6 +182,7 @@ const RecipeDetailsPage: React.FC = () => {
               <p className="text-lg laptop:text-2xl mb-5 font-semibold">
                 By
                 <span className="text-primary publisher">
+                  {" "}
                   {recipe.publisher}
                 </span>
               </p>
@@ -256,7 +257,7 @@ const RecipeDetailsPage: React.FC = () => {
               isInRecipeDetailsPage={true}
               screenHeight={leftComponentHeight} // Pass dynamic screen height
               recommendedRecipes={recommendedRecipes}
-              shuffleRecipe={true}
+              shuffleRecipe={false}
               recipesPerPage={24}
               customTitle={"Similar Recipes"}
             />
@@ -270,7 +271,7 @@ const RecipeDetailsPage: React.FC = () => {
             isInRecipeDetailsPage={false}
             screenHeight={leftComponentHeight} // Pass dynamic screen height
             recommendedRecipes={recommendedRecipes}
-            shuffleRecipe={true}
+            shuffleRecipe={false}
             recipesPerPage={2}
             customTitle={"Similar Recipes"}
           />
