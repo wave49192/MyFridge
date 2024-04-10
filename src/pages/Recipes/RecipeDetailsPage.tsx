@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { RecommendedRecipe } from "../../components";
+import { AiFillStar } from "react-icons/ai";
+import { useAuth } from "../../context/AuthContext";
 
 interface Recipe {
   recipe_id: string;
@@ -15,6 +17,10 @@ interface Recipe {
   cleaned_ingredients: string;
 }
 
+interface UserInfo {
+  favourite_recipes: Recipe[];
+}
+
 const RecipeDetailsPage: React.FC = () => {
   const { recipeId } = useParams<{ recipeId: string }>();
   const [recommendedRecipes, setRecommendedRecipes] = useState<Recipe[]>([]);
@@ -23,6 +29,48 @@ const RecipeDetailsPage: React.FC = () => {
   const [isHDScreen, setIsHDScreen] = useState<boolean>(false);
   const leftComponentRef = useRef<HTMLDivElement>(null);
   const [leftComponentHeight, setLeftComponentHeight] = useState<number>(0);
+  const { user } = useAuth();
+  const [isRecipeFavourited, setIsRecipeFavourited] = useState<boolean>(false);
+
+  const handleFavourite = () => {
+    if (isRecipeFavourited) {
+      axios
+        .delete(
+          `${import.meta.env.VITE_BACKEND_API_URL}/users/${
+            user?.id
+          }/favourites/`,
+          { data: { recipe: recipe } }
+        )
+        .then((_) => setIsRecipeFavourited(false));
+    } else {
+      axios
+        .post(
+          `${import.meta.env.VITE_BACKEND_API_URL}/users/${
+            user?.id
+          }/favourites/`,
+          { recipe: recipe }
+        )
+        .then((_) => setIsRecipeFavourited(true));
+    }
+  };
+
+  const fetchFavouriteRecipe = async () => {
+    try {
+      const response = await axios.get<UserInfo>(
+        `http://127.0.0.1:8000/users/${user?.id}/favourites`
+      );
+
+      const userFavourites = response.data.favourite_recipes.filter(
+        (r) => r.recipe_id === recipeId
+      );
+
+      setIsRecipeFavourited(userFavourites.length !== 0);
+
+      return userFavourites.length !== 0;
+    } catch (error) {
+      console.error("Error fetching recipe:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -31,13 +79,16 @@ const RecipeDetailsPage: React.FC = () => {
           `http://127.0.0.1:8000/recipes/details/?recipe_id=${recipeId}`
         );
         setRecipe(response.data);
+        return response.data;
       } catch (error) {
         console.error("Error fetching recipe:", error);
       }
     };
 
-    fetchRecipe();
-  }, [recipeId]);
+    fetchRecipe().then((data) => {
+      fetchFavouriteRecipe().then((status) => console.log(status));
+    });
+  }, [user, recipeId]);
 
   useEffect(() => {
     if (leftComponentRef.current) {
@@ -112,9 +163,22 @@ const RecipeDetailsPage: React.FC = () => {
               className="w-full h-[300px] laptop:h-[460px] desktop:h-[550px] desktop:mx-auto object-cover hd:rounded-3xl"
             />
             <div className="p-5">
-              <h2 className="text-3xl laptop:text-4xl font-bold mb-1 text-secondary-green recipeTitle">
-                {recipe.title}
-              </h2>
+              <div className="flex justify-between items-center">
+                <h2 className="text-3xl laptop:text-4xl font-bold mb-1 text-secondary-green recipeTitle">
+                  {recipe.title}
+                </h2>
+                {!isRecipeFavourited ? (
+                  <AiFillStar
+                    onClick={handleFavourite}
+                    className="fill-gray w-8 h-8"
+                  />
+                ) : (
+                  <AiFillStar
+                    onClick={handleFavourite}
+                    className="fill-primary w-8 h-8"
+                  />
+                )}
+              </div>
               <p className="text-lg laptop:text-2xl mb-5 font-semibold">
                 By
                 <span className="text-primary publisher">

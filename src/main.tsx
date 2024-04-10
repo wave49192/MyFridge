@@ -12,6 +12,7 @@ import Navbar from "./components/Navbar/Navbar.tsx";
 import DetectPage from "./pages/Inventory/Detect/Detect.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
 import AddPage from "./pages/Inventory/Add/Add.tsx";
+import FavouritesPage from "./pages/Favourites/FavouritesPage.tsx";
 
 document.documentElement.setAttribute("data-theme", "emmy");
 const container = document.getElementById("root");
@@ -24,6 +25,7 @@ root.render(
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/recipes" element={<RecipesPage />} />
+          <Route path="/favourites" element={<FavouritesPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/inventory/detect" element={<DetectPage />} />
           <Route path="/inventory/add" element={<AddPage />} />
