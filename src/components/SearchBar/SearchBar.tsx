@@ -14,7 +14,7 @@ const SearchBar: React.FC<Props> = ({ inventory, setInventory }) => {
     <div className="flex-1 relative">
       <input
         type="text"
-        placeholder="Search recipes"
+        placeholder="Search ingredients"
         className="input rounded-2xl w-full pl-10 bg-accent bg-opacity-5 placeholder-accent placeholder-opacity-50"
         value={searchTerm}
         onChange={e => {
